@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRED, rollbackFor = {ObjectNotFoundException.class,
+@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {ObjectNotFoundException.class,
         ConstraintViolationException.class})
 public class AnalysisServiceImpl implements AnalysisService {
 

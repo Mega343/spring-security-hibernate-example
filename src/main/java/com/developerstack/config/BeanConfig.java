@@ -2,16 +2,14 @@ package com.developerstack.config;
 
 import com.developerstack.controller.AppErrorController;
 import org.apache.commons.dbcp.BasicDataSource;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
-import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -23,6 +21,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
+@EnableTransactionManagement
 @ComponentScan(basePackages = "com.developerstack")
 public class BeanConfig {
 
@@ -33,19 +32,19 @@ public class BeanConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[]{"com.developerstack.model"});
+        sessionFactory.setPackagesToScan(new String[]{"com.developerstack"});
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
 
-    @Bean
-    public HibernateTransactionManager transactionManager(
-            SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager(
-                sessionFactory);
-
-        return transactionManager;
-    }
+//    @Bean
+//    public HibernateTransactionManager transactionManager(
+//            SessionFactory sessionFactory) {
+//        HibernateTransactionManager transactionManager = new HibernateTransactionManager(
+//                sessionFactory);
+//
+//        return transactionManager;
+//    }
 
     @Bean
     public DataSource dataSource() {
