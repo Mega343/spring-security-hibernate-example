@@ -4,6 +4,8 @@ import com.developerstack.dao.EmployeeDao;
 import com.developerstack.model.Employee;
 import com.developerstack.service.EmployeeService;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.hibernate.ObjectNotFoundException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +21,8 @@ import java.util.List;
 
 
 @Component(value = "userDetailService")
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = {ObjectNotFoundException.class,
+		ConstraintViolationException.class})
 public class UserDetailServiceImpl implements UserDetailsService, EmployeeService {
 	
 	@Autowired

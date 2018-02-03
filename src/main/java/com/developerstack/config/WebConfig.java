@@ -1,5 +1,6 @@
 package com.developerstack.config;
 
+import com.developerstack.service.impl.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -31,6 +32,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("login");
         registry.addViewController("/login").setViewName("login");
+    }
+
+    @Bean
+    public UserDetailServiceImpl userDetailService(){
+        return new UserDetailServiceImpl();
     }
 
     @Bean

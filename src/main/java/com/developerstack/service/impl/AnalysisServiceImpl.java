@@ -3,7 +3,9 @@ package com.developerstack.service.impl;
 import com.developerstack.dao.AnalysisDao;
 import com.developerstack.model.Analysis;
 import com.developerstack.service.AnalysisService;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,7 +16,8 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = {ObjectNotFoundException.class,
+        ConstraintViolationException.class})
 public class AnalysisServiceImpl implements AnalysisService {
 
     @Autowired

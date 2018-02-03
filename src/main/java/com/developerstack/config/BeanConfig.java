@@ -1,16 +1,17 @@
 package com.developerstack.config;
 
 import com.developerstack.controller.AppErrorController;
-import com.developerstack.service.impl.UserDetailServiceImpl;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -35,6 +36,15 @@ public class BeanConfig {
         sessionFactory.setPackagesToScan(new String[]{"com.developerstack.model"});
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
+    }
+
+    @Bean
+    public HibernateTransactionManager transactionManager(
+            SessionFactory sessionFactory) {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager(
+                sessionFactory);
+
+        return transactionManager;
     }
 
     @Bean

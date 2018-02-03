@@ -7,6 +7,8 @@ import com.developerstack.service.AnalysisService;
 import com.developerstack.service.AppointmentsService;
 import com.developerstack.service.EmployeeService;
 import com.developerstack.service.PatientService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.developerstack.config.Constants.*;
@@ -35,6 +38,7 @@ public class PatientController {
     @Autowired
     private AppointmentsService appointmentsService;
 
+    private static final Logger LOG = LogManager.getLogger(PatientController.class);
 
     @RequestMapping(value = "/add_patient", method = RequestMethod.GET)
     public ModelAndView patientAddView() {
@@ -169,7 +173,7 @@ public class PatientController {
         public ModelAndView editPatient(@RequestParam("patientId") String patientId) {
             ModelAndView model = new ModelAndView();
         try {
-
+            LOG.trace("In edit patient for patient id " + patientId);
             Patient patient = patientService.getPatient(Integer.parseInt(patientId));
             List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
             List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
@@ -190,7 +194,9 @@ public class PatientController {
     public ModelAndView updatePatient(@ModelAttribute(PATIENT) Patient patient) {
         ModelAndView model = new ModelAndView();
         try {
+            LOG.trace("Try to edit patient with patient id " + patient.getPatientId());
             patientService.edit(patient);
+            LOG.trace("Patient with patient id " + patient.getPatientId() + " successfully edited");
             List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
             List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
             model.addObject(EMPLOYEE, employeeService.getEmployee(patient.getEmployee().getEmployeeId()));
@@ -199,7 +205,8 @@ public class PatientController {
             model.addObject(APPOINTMENTS, appointmentsList);
             model.setViewName("viewPatient");
         } catch (Exception e) {
-            model.addObject(ERROR, e.getMessage());
+            LOG.error("Error due to edit patient with id " + patient.getPatientId() + ". " + Arrays.toString(e.getStackTrace()) + " " + e.getMessage());
+            model.addObject(ERROR, "Не получилось обновить пациента. Что-то произошло не так.");
             model.setViewName(DASHBOARD);
         }
         return model;
