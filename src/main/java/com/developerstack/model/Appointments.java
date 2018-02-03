@@ -3,7 +3,6 @@ package com.developerstack.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.sql.Blob;
 
 @Entity
 @Table(name = "appointments")
@@ -22,7 +21,8 @@ public class Appointments implements Serializable {
     @NotNull
     private String appointmentsDate;
     @Column(name = "appointments_picture")
-    private Blob appointmentsPicture;
+    @Lob
+    private byte[] appointmentsPicture;
 
     public Appointments() {
     }
@@ -59,11 +59,11 @@ public class Appointments implements Serializable {
         this.appointmentsDate = appointmentsDate;
     }
 
-    public Blob getAppointmentsPicture() {
+    public byte[] getAppointmentsPicture() {
         return appointmentsPicture;
     }
 
-    public void setAppointmentsPicture(Blob appointmentsPicture) {
+    public void setAppointmentsPicture(byte[] appointmentsPicture) {
         this.appointmentsPicture = appointmentsPicture;
     }
 }

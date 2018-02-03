@@ -6,12 +6,15 @@
 <t:admin title="Добавить Пациента">
     <jsp:attribute name="error">${error}</jsp:attribute>
 <jsp:attribute name="table">
+
 <link rel="stylesheet" type="text/css" href="/collapse.css">
 <script type="text/javascript" src="/jquery.mask.min.js"></script>
 <script type="text/javascript" src="/dateMask.js"></script>
+<script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/blockButton.js"></script>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
-    <form class="form-signin" action="/new_patient" method="post">
+    <form class="form-signin" action="/new_patient" method="post" id="add_patient_form">
         <p style="color: red">${error}</p>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
@@ -82,7 +85,7 @@
 
         <div class="form-group row">
             <center>
-            <button class="btn btn-lg btn-primary btn-block" type="submit" style="WIDTH: 235px; HEIGHT: 51px">Добавить пациента
+            <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn_add_patient" style="WIDTH: 235px; HEIGHT: 51px">Добавить пациента
             </button></center>
         </div>
     </form>

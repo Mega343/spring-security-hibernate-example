@@ -25,7 +25,6 @@ public class AnalysisServiceImpl implements AnalysisService {
     @Override
     public boolean add(Analysis analysis, MultipartFile analysisFile) throws IOException {
         byte[] file = analysisFile.getBytes();
-//        Blob image = Hibernate.getLobCreator(session.getCurrentSession()).createBlob(file);
         analysis.setAnalysisPicture(file);
         analysisDao.add(analysis);
         return true;

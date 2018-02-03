@@ -1,6 +1,7 @@
 package com.developerstack.config;
 
 import com.developerstack.controller.AppErrorController;
+import com.developerstack.service.impl.UserDetailServiceImpl;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -51,6 +53,9 @@ public class BeanConfig {
                 setProperty("hibernate.hbm2ddl.auto", "create");
                 setProperty("hibernate.show_sql", "true");
                 setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+                setProperty("hibernate.connection.CharSet", "utf8");
+                setProperty("hibernate.connection.characterEncoding", "utf8");
+                setProperty("hibernate.connection.useUnicode", "true");
                // setProperty("hibernate.hbm2ddl.import_files", "data.sql");
             }
         };
@@ -61,7 +66,6 @@ public class BeanConfig {
     public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
         return entityManagerFactory.createEntityManager();
     }
-
 
     @Bean
     public AppErrorController appErrorController(){return new AppErrorController(errorAttributes);}

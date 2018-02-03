@@ -11,6 +11,7 @@
 <script type="text/javascript" src="/dateMask.js"></script>
 <script type="text/javascript" src="/accordeon.js"></script>
 <script type="text/javascript" src="/fileUpload.js"></script>
+<script type="text/javascript" src="/openImages.js"></script>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="row">
@@ -95,7 +96,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="analysis" items="${patient.analysis}">
+                            <c:forEach var="analysis" items="${analysis}">
                             <tr>
                                 <td class="col-xs-8 col-sm-8 col-md-8">
                                     <p readonly="">${analysis.analysisName}</p>
@@ -104,11 +105,8 @@
                                     <p readonly="">${analysis.analysisDate}</p>
                                 </td>
                                 <td class="col-xs-2 col-sm-2 col-md-2">
-                                    <form action="/viewAnalysis" method="get">
-                                        <%--<img src="${analysis.analysisPicture}" width="500" height="500"/>--%>
-                                        <input type="hidden" name="analysis_id" value="${analysis.analysisId}"/>
-                                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#viewAnalysis">Открыть анализ</button>
-                                    </form>
+                                        <input type="button"  class="btn btn-xs btn-warning" value="Открыть анализ"
+                                               id="analysis_button" onclick="openAnalysis(${analysis.analysisId})" />
                                 </td>
                             </tr>
                             </c:forEach>
@@ -143,29 +141,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="appointment" items="${patient.appointments}">
+                            <c:forEach var="appointment" items="${appointments}">
                                 <tr>
-                                    <td>
-                                        <div class="col-xs-8 col-sm-8 col-md-8">
-                                            <div class="form-group row">
-                                                <p readonly="">${appointment.appointmentsName}</p>
-                                            </div>
-                                        </div>
+                                    <td class="col-xs-8 col-sm-8 col-md-8">
+                                        <p readonly="">${appointment.appointmentsName}</p>
                                     </td>
-                                    <td>
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
-                                            <div class="form-group row">
-                                                <p readonly="">${appointment.appointmentsDate}</p>
-                                            </div>
-                                        </div>
+                                    <td class="col-xs-2 col-sm-2 col-md-2">
+                                        <p readonly="">${appointment.appointmentsDate}</p>
                                     </td>
-                                    <td>
-                                        <div class="right">
-                                            <form action="/view_appointment" method="get">
-                                                <input type="hidden" name="analysis_id" value="${appointment.appointmentsId}"/>
-                                                <button type="submit" class="btn btn-xs btn-warning">Открыть назначение</button>
-                                            </form>
-                                        </div>
+                                    <td class="col-xs-2 col-sm-2 col-md-2">
+                                        <input type="button"  class="btn btn-xs btn-warning" value="Открыть назначение"
+                                               id="appointments_button" onclick="openAppointments(${appointment.appointmentsId})" />
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -174,7 +160,7 @@
                     </div>
                     <div class="form-group row">
                         <center>
-                        <a href="#" class="btn btn-xs btn-warning">Добавить назначение</a>
+                            <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#addAppointments">Добавить назначение</button>
                         </center>
                     </div>
                 </div>
@@ -193,7 +179,8 @@
     </div>
 
     <%@ include file="addAnalysis.jsp"%>
-    <%--<%@ include file="viewAnalysis.jsp"%>--%>
+    <%@ include file="addAppointments.jsp"%>
+
     </jsp:attribute>
     <jsp:attribute name="action">/dashboard</jsp:attribute>
     <jsp:attribute name="actionDescription">На главную страницу</jsp:attribute>

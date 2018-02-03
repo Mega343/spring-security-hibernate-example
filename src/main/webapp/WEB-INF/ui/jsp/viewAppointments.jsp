@@ -3,6 +3,6 @@
 <head>
 </head>
 <body>
-<img src="${image}" width="500" height="500" alt="Analysis image"/>
+<img src="${image}" width="500" height="500" alt="Appointments image"/>
 </body>
 </html>

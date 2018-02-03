@@ -1,12 +1,14 @@
 package com.developerstack.service;
 
 import com.developerstack.model.Appointments;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface AppointmentsService {
 
-    boolean add(Appointments appointments);
+    boolean add(Appointments appointments, MultipartFile appointmentsFile) throws IOException;
 
     boolean edit(Appointments appointments);
 

@@ -5,10 +5,10 @@ INSERT INTO employee(first_name,last_name,login,email,phone_number,role_id,passw
 INSERT INTO employee(first_name,last_name,login,email,phone_number,role_id,password)VALUES('Ира', 'Ира','Ira','iraa@mail.ru','+05097378744', 1, 'qwerty');
 INSERT INTO employee(first_name,last_name,login,email,phone_number,role_id,password)VALUES('Света', 'Света','Svra','irasa@mail.ru','+380999738744', 1, 'qwerty');
 
-INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Сидор','Сидоров','Сидорович','0661234567','1990-12-30','2018-01-15','Волчанка',1);
-INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Иван','Иванов','Иванович','0661334567','1980-12-30','2017-01-15','Гранулематоз Вегенера',2);
-INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Петр','Петров','Петрович','0561334567','1983-12-30','2017-09-25','Синдром Мюнхгаузена',2);
-INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Илья','Илльичев','Ильич','0991334567','1953-12-30','2017-10-05','Гиппопотомомонстросесквиппедалиофобия',1);
+INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Сидор','Сидоров','Сидорович','0661234567','01-01-1991','01-15-2018','Волчанка',1);
+INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Иван','Иванов','Иванович','0661334567','10-12-1880','01-15-2018','Гранулематоз Вегенера',2);
+INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Петр','Петров','Петрович','0561334567','12-02-1972','09-25-2017','Синдром Мюнхгаузена',2);
+INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Илья','Илльичев','Ильич','0991334567','12-12-1980','10-05-2016','Гиппопотомомонстросесквиппедалиофобия',1);
 
 INSERT INTO analysis(ANALYSIS_DATE,ANALYSIS_NAME,PATIENT_ID,ANALYSIS_PICTURE)VALUES('2018-01-04','Общий анализ крови',1,null);
 INSERT INTO analysis(ANALYSIS_DATE,ANALYSIS_NAME,PATIENT_ID,ANALYSIS_PICTURE)VALUES('2018-01-05','Общий анализ мочи',1,null);

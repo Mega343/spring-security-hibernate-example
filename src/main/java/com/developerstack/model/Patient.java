@@ -34,10 +34,10 @@ public class Patient implements Serializable {
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
     private Employee employee;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
     private List<Analysis> analysis;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
     private List<Appointments> appointments;
 

@@ -25,7 +25,7 @@ public class PatientDaoImpl implements PatientDao {
 
     @Override
     public boolean edit(Patient patient) {
-        session.getCurrentSession().saveOrUpdate(patient);
+        session.getCurrentSession().merge(patient);
         return true;
     }
 

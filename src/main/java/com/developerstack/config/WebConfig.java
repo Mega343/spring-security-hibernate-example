@@ -32,7 +32,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("login");
         registry.addViewController("/login").setViewName("login");
     }
-    
+
     @Bean
     public InternalResourceViewResolver setupViewResolver()  {
         InternalResourceViewResolver resolver =  new InternalResourceViewResolver();
