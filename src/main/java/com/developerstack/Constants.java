@@ -1,4 +1,4 @@
-package com.developerstack.config;
+package com.developerstack;
 
 public class Constants {
 

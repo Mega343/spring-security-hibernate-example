@@ -2,110 +2,238 @@ package com.developerstack.dao.impl;
 
 import com.developerstack.dao.EmployeeDao;
 import com.developerstack.model.Employee;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
-	@Autowired
-	private SessionFactory session;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	public List<Employee> getAllEmployees() {
-		Criteria criteria = session.openSession().createCriteria(Employee.class);
-		return criteria.list();
-	}
+    public List<Employee> getAllEmployees() {
+        Session session = null;
+        List<Employee> employees = new ArrayList<>();
+        try {
+            session = sessionFactory.openSession();
+            employees = session.createCriteria(Employee.class).list();
+        } catch (Exception e) {
 
-	public Employee findEmployeeByLogin(String login) {
-		Employee employee = null;
-		Criteria criteria = session.openSession().createCriteria(Employee.class);
-		criteria.add(Restrictions.eq("login", login));
-		List<Employee> entityList = criteria.list();
-		if(!entityList.isEmpty()) {
-			employee = entityList.get(0);
-		}
-		return employee;
-	}
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return employees;
+    }
 
-	@Override
-	public boolean add(Employee employee) {
-		session.getCurrentSession().save(employee);
-		return true;
-	}
+    public Employee findEmployeeByLogin(String login) {
+        List<Employee> employees;
+        Employee employee = new Employee();
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            employees = session.createCriteria(Employee.class).list();
+            if (!employees.isEmpty()) {
+                employee = employees.get(0);
+            }
+        } catch (Exception e) {
 
-	@Override
-	public boolean edit(Employee employee) {
-		session.getCurrentSession().merge(employee);
-		return false;
-	}
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
 
-	@Override
-	public boolean delete(int id) {
-		Query query = session.getCurrentSession().createQuery("delete Employee where employeeId = :id");
-		query.setParameter("id", id);
-		query.executeUpdate();
-		return true;
-	}
+        return employee;
+    }
 
-	@Override
-	public Employee getEmployee(int id) {
-		Employee employee = (Employee) session.getCurrentSession().get(Employee.class, id);
-		return employee;
-	}
+    @Override
+    public boolean add(Employee employee) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.save(employee);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null)
+            transaction.rollback();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public List<Employee> searchByLastName(String lastName) {
-		Query query = session.getCurrentSession().createQuery("from Employee where lastName = :lastName");
-		query.setParameter("lastName", lastName);
-		List<Employee> employees = query.list();
-		return employees;
-	}
+    @Override
+    public boolean edit(Employee employee) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.merge(employee);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null)
+            transaction.rollback();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public List<Employee> searchByLastNameAndFirstName(String lastName, String firstName) {
-		Query query = session.getCurrentSession().createQuery("from Employee where lastName = :lastName and firstName = :=firstName");
-		query.setParameter("lastName", lastName);
-		query.setParameter("firstName", firstName);
-		List<Employee> employees = query.list();
-		return employees;
-	}
+    @Override
+    public boolean delete(int id) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("delete Employee where employeeId = :id");
+            query.setParameter("id", id);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null)
+            transaction.rollback();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public List<Employee> searchByFullName(String lastName, String firstName, String patronymic) {
-		Query query = session.getCurrentSession().createQuery("from Employee where lastName = :lastName and firstName = :=firstName and patronymic :=patronymic");
-		query.setParameter("lastName", lastName);
-		query.setParameter("firstName", firstName);
-		query.setParameter("patronymic", patronymic);
-		List<Employee> employees = query.list();
-		return employees;
-	}
+    @Override
+    public Employee getEmployee(int id) {
+        Session session = null;
+        Employee employee = new Employee();
+        try {
+            session = sessionFactory.openSession();
+            employee = (Employee) session.get(Employee.class, id);
+        } catch (Exception e) {
 
-	@Override
-	public Employee searchByEmail(String email) {
-		Criteria criteria = session.getCurrentSession().createCriteria(Employee.class);
-		criteria.add(Restrictions.eq("email", email));
-		List<Employee> list = criteria.list();
-		if (list.isEmpty()) {
-			return null;
-		}
-		return list.get(0);
-	}
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return employee;
+    }
 
-	@Override
-	public List<Employee> searchByPhoneNumber(String phoneNumber) {
-		Criteria criteria = session.getCurrentSession().createCriteria(Employee.class);
-		criteria.add(Restrictions.eq("phoneNumber", phoneNumber));
-		List<Employee> list = criteria.list();
-		if (list.isEmpty()) {
-			return null;
-		}
-		return list;
-	}
+    @Override
+    public List<Employee> searchByLastName(String lastName) {
+        List<Employee> employees = new ArrayList<>();
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+
+            Query query = session.createQuery("from Employee where lastName = :lastName");
+            query.setParameter("lastName", lastName);
+            employees = query.list();
+        } catch (Exception e) {
+
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return employees;
+    }
+
+    @Override
+    public List<Employee> searchByLastNameAndFirstName(String lastName, String firstName) {
+        List<Employee> employees = new ArrayList<>();
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("from Employee where lastName = :lastName and firstName = :=firstName");
+            query.setParameter("lastName", lastName);
+            query.setParameter("firstName", firstName);
+            employees = query.list();
+        } catch (Exception e) {
+
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return employees;
+    }
+
+    @Override
+    public List<Employee> searchByFullName(String lastName, String firstName, String patronymic) {
+        List<Employee> employees = new ArrayList<>();
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("from Employee where lastName = :lastName and firstName = :=firstName and patronymic :=patronymic");
+            query.setParameter("lastName", lastName);
+            query.setParameter("firstName", firstName);
+            query.setParameter("patronymic", patronymic);
+            employees = query.list();
+        } catch (Exception e) {
+
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return employees;
+    }
+
+    @Override
+    public Employee searchByEmail(String email) {
+        Session session = null;
+        Employee employee = new Employee();
+        try {
+            session = sessionFactory.openSession();
+            Criteria criteria = session.createCriteria(Employee.class);
+            criteria.add(Restrictions.eq("email", email));
+            List<Employee> list = criteria.list();
+            if (!list.isEmpty()) {
+                employee = list.get(0);
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return employee;
+    }
+
+    @Override
+    public List<Employee> searchByPhoneNumber(String phoneNumber) {
+        List<Employee> employees = new ArrayList<>();
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Criteria criteria = session.createCriteria(Employee.class);
+            criteria.add(Restrictions.eq("phoneNumber", phoneNumber));
+            employees = criteria.list();
+            if (employees.isEmpty()) {
+                return null;
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return employees;
+    }
 }

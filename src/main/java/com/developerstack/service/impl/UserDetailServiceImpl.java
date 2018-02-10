@@ -21,8 +21,8 @@ import java.util.List;
 
 
 @Component(value = "userDetailService")
-@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {ObjectNotFoundException.class,
-		ConstraintViolationException.class})
+//@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {ObjectNotFoundException.class,
+//		ConstraintViolationException.class})
 public class UserDetailServiceImpl implements UserDetailsService, EmployeeService {
 	
 	@Autowired

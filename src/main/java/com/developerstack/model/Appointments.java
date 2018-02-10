@@ -23,6 +23,18 @@ public class Appointments implements Serializable {
     @Column(name = "appointments_picture")
     @Lob
     private byte[] appointmentsPicture;
+    @Column(name = "appointments_picture_2")
+    @Lob
+    private byte[] appointmentsPictureTwo;
+    @Column(name = "appointments_picture_3")
+    @Lob
+    private byte[] appointmentsPictureThree;
+    @Column(name = "appointments_picture_4")
+    @Lob
+    private byte[] appointmentsPictureFour;
+    @Column(name = "appointments_picture_5")
+    @Lob
+    private byte[] appointmentsPictureFive;
 
     public Appointments() {
     }
@@ -61,6 +73,38 @@ public class Appointments implements Serializable {
 
     public byte[] getAppointmentsPicture() {
         return appointmentsPicture;
+    }
+
+    public byte[] getAppointmentsPictureTwo() {
+        return appointmentsPictureTwo;
+    }
+
+    public void setAppointmentsPictureTwo(byte[] appointmentsPictureTwo) {
+        this.appointmentsPictureTwo = appointmentsPictureTwo;
+    }
+
+    public byte[] getAppointmentsPictureThree() {
+        return appointmentsPictureThree;
+    }
+
+    public void setAppointmentsPictureThree(byte[] appointmentsPictureThree) {
+        this.appointmentsPictureThree = appointmentsPictureThree;
+    }
+
+    public byte[] getAppointmentsPictureFour() {
+        return appointmentsPictureFour;
+    }
+
+    public void setAppointmentsPictureFour(byte[] appointmentsPictureFour) {
+        this.appointmentsPictureFour = appointmentsPictureFour;
+    }
+
+    public byte[] getAppointmentsPictureFive() {
+        return appointmentsPictureFive;
+    }
+
+    public void setAppointmentsPictureFive(byte[] appointmentsPictureFive) {
+        this.appointmentsPictureFive = appointmentsPictureFive;
     }
 
     public void setAppointmentsPicture(byte[] appointmentsPicture) {

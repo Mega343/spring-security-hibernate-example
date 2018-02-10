@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.developerstack.config.Constants.*;
+import static com.developerstack.Constants.*;
 
 @Controller
 public class PatientController {

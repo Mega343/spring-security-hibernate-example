@@ -24,6 +24,18 @@ public class Analysis implements Serializable {
     @Column(name = "analysis_picture")
     @Lob
     private byte[] analysisPicture;
+    @Column(name = "analysis_picture_2")
+    @Lob
+    private byte[] analysisPictureTwo;
+    @Column(name = "analysis_picture_3")
+    @Lob
+    private byte[] analysisPictureThree;
+    @Column(name = "analysis_picture_4")
+    @Lob
+    private byte[] analysisPictureFour;
+    @Column(name = "analysis_picture_5")
+    @Lob
+    private byte[] analysisPictureFive;
 
     public Analysis() {
     }
@@ -66,5 +78,37 @@ public class Analysis implements Serializable {
 
     public void setAnalysisPicture(byte[] analysisPicture) {
         this.analysisPicture = analysisPicture;
+    }
+
+    public byte[] getAnalysisPictureTwo() {
+        return analysisPictureTwo;
+    }
+
+    public void setAnalysisPictureTwo(byte[] analysisPictureTwo) {
+        this.analysisPictureTwo = analysisPictureTwo;
+    }
+
+    public byte[] getAnalysisPictureThree() {
+        return analysisPictureThree;
+    }
+
+    public void setAnalysisPictureThree(byte[] analysisPictureThree) {
+        this.analysisPictureThree = analysisPictureThree;
+    }
+
+    public byte[] getAnalysisPictureFive() {
+        return analysisPictureFive;
+    }
+
+    public void setAnalysisPictureFive(byte[] analysisPictureFive) {
+        this.analysisPictureFive = analysisPictureFive;
+    }
+
+    public byte[] getAnalysisPictureFour() {
+        return analysisPictureFour;
+    }
+
+    public void setAnalysisPictureFour(byte[] analysisPictureFour) {
+        this.analysisPictureFour = analysisPictureFour;
     }
 }

@@ -14,6 +14,6 @@ public interface AppointmentsDao {
 
     Appointments getAppointments(int id);
 
-    List findAppointmentsByPatientId(int id);
+    List<Appointments> findAppointmentsByPatientId(int id);
 
 }

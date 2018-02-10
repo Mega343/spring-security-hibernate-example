@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-import static com.developerstack.config.Constants.*;
+import static com.developerstack.Constants.*;
 
 @Controller
 public class DashboardController {
