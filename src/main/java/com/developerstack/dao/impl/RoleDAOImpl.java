@@ -9,6 +9,9 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class RoleDAOImpl implements RoleDao {
 
@@ -111,5 +114,21 @@ public class RoleDAOImpl implements RoleDao {
             }
         }
         return role;
+    }
+
+    public List<Role> getAllRoles() {
+        Session session = null;
+        List<Role> roles = new ArrayList<>();
+        try {
+            session = sessionFactory.openSession();
+            roles = session.createCriteria(Role.class).list();
+        } catch (Exception e) {
+
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return roles;
     }
 }

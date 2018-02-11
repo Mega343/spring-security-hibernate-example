@@ -18,4 +18,6 @@ public interface EmployeeService {
 	
 	List<Employee> getEmployees();
 
+	Employee findEmployeeByLogin(String login);
+
 }

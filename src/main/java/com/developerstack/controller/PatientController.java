@@ -2,6 +2,7 @@ package com.developerstack.controller;
 
 import com.developerstack.model.Analysis;
 import com.developerstack.model.Appointments;
+import com.developerstack.model.Employee;
 import com.developerstack.model.Patient;
 import com.developerstack.service.AnalysisService;
 import com.developerstack.service.AppointmentsService;
@@ -21,10 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.developerstack.Constants.*;
+import static java.util.Objects.nonNull;
 
 @Controller
 public class PatientController {
@@ -38,12 +42,13 @@ public class PatientController {
     @Autowired
     private AppointmentsService appointmentsService;
 
-    private static final Logger LOG = LogManager.getLogger(PatientController.class);
-
     @RequestMapping(value = "/add_patient", method = RequestMethod.GET)
     public ModelAndView patientAddView() {
         ModelAndView model = new ModelAndView();
-        model.addObject(EMPLOYEES, employeeService.getEmployees());
+        List<Employee> employees = employeeService.getEmployees().stream()
+                .filter(employee -> ADMIN_ROLE.equals(employee.getRole().getUserRole()) || DOCTOR_ROLE.equals(employee.getRole().getUserRole()))
+                .collect(Collectors.toList());
+        model.addObject(EMPLOYEES, employees);
         model.setViewName("addPatient");
         return model;
     }
@@ -105,7 +110,7 @@ public class PatientController {
 
     @RequestMapping(value = "/new_appointments", method = RequestMethod.POST)
     public ModelAndView addAppointment(@ModelAttribute(APPOINTMENTS) Appointments appointments,
-                                   @RequestParam("appointmentsFile") MultipartFile appointmentsFile) {
+                                   @RequestParam("appointments[]") MultipartFile[] appointmentsFile) {
         ModelAndView model = new ModelAndView();
         try {
             appointmentsService.add(appointments, appointmentsFile);
@@ -138,7 +143,7 @@ public class PatientController {
             res.setContentType("image/jpg");
             outputStream.write(analysis.getAnalysisPicture());
             outputStream.close();
-            model.addObject(IMAGE, outputStream);
+            model.addObject(IMAGE_ONE, outputStream);
             Patient patient = patientService.getPatient(analysis.getPatientId());
             model.addObject(PATIENT, patient);
             model.setViewName("viewAnalysis");
@@ -157,10 +162,12 @@ public class PatientController {
                 Appointments appointments = appointmentsService.getAppointments(Integer.parseInt(appointmentsId));
                 res.setContentType("image/jpg");
                 outputStream.write(appointments.getAppointmentsPicture());
-                model.addObject(IMAGE, outputStream);
-                Patient patient = patientService.getPatient(appointments.getPatientId());
-                model.addObject(PATIENT, patient);
-                model.setViewName("viewAppointments");
+                outputStream.write(appointments.getAppointmentsPictureTwo());
+
+//                model.addObject(IMAGE_ONE, outputStream);
+//                Patient patient = patientService.getPatient(appointments.getPatientId());
+//                model.addObject(PATIENT, patient);
+               // model.setViewName("viewAppointments");
             } catch (Exception e) {
                 model.addObject(ERROR, e.getMessage());
                 model.setViewName(DASHBOARD);
@@ -173,7 +180,6 @@ public class PatientController {
         public ModelAndView editPatient(@RequestParam("patientId") String patientId) {
             ModelAndView model = new ModelAndView();
         try {
-            LOG.trace("In edit patient for patient id " + patientId);
             Patient patient = patientService.getPatient(Integer.parseInt(patientId));
             List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
             List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
@@ -194,9 +200,7 @@ public class PatientController {
     public ModelAndView updatePatient(@ModelAttribute(PATIENT) Patient patient) {
         ModelAndView model = new ModelAndView();
         try {
-            LOG.trace("Try to edit patient with patient id " + patient.getPatientId());
             patientService.edit(patient);
-            LOG.trace("Patient with patient id " + patient.getPatientId() + " successfully edited");
             List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
             List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
             model.addObject(EMPLOYEE, employeeService.getEmployee(patient.getEmployee().getEmployeeId()));
@@ -205,7 +209,6 @@ public class PatientController {
             model.addObject(APPOINTMENTS, appointmentsList);
             model.setViewName("viewPatient");
         } catch (Exception e) {
-            LOG.error("Error due to edit patient with id " + patient.getPatientId() + ". " + Arrays.toString(e.getStackTrace()) + " " + e.getMessage());
             model.addObject(ERROR, "Не получилось обновить пациента. Что-то произошло не так.");
             model.setViewName(DASHBOARD);
         }

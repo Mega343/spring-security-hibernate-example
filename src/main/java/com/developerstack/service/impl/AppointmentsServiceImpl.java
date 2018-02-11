@@ -15,17 +15,41 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-//@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {ObjectNotFoundException.class,
-//        ConstraintViolationException.class})
 public class AppointmentsServiceImpl implements AppointmentsService {
 
     @Autowired
     private AppointmentsDao appointmentsDao;
 
     @Override
-    public boolean add(Appointments appointments, MultipartFile appointmentsFile) throws IOException {
-        byte[] file = appointmentsFile.getBytes();
-        appointments.setAppointmentsPicture(file);
+    public boolean add(Appointments appointments, MultipartFile[] appointmentsFile) throws IOException {
+        byte[] file;
+        for (int i = 0; i < appointmentsFile.length; i++) {
+            file = appointmentsFile[i].getBytes();
+            if (i == 0) {
+                appointments.setAppointmentsPicture(file);
+                appointments.setImagesCount(1);
+            }
+            if (i == 1) {
+                appointments.setAppointmentsPictureTwo(file);
+                appointments.setImagesCount(2);
+            }
+            if (i == 2) {
+                appointments.setAppointmentsPictureThree(file);
+                appointments.setImagesCount(3);
+            }
+            if (i == 3) {
+                appointments.setAppointmentsPictureFour(file);
+                appointments.setImagesCount(4);
+            }
+            if (i == 4) {
+                appointments.setAppointmentsPictureFive(file);
+                appointments.setImagesCount(5);
+            }
+            if (i == 5) {
+                break;
+            }
+        }
+
         appointmentsDao.add(appointments);
         return true;
     }

@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-//@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {ObjectNotFoundException.class,
-//        ConstraintViolationException.class})
 public class PatientServiceImpl implements PatientService {
 
     @Autowired
@@ -51,7 +49,7 @@ public class PatientServiceImpl implements PatientService {
         if (input.isEmpty()) {
             return result;
         }
-        if (NumberUtils.isDigits(input)) {
+        if (input.startsWith("+") || NumberUtils.isDigits(input)) {
             result = patientDao.searchByPhoneNumber(input);
         } else {
             String[] searchCriteria = input.split(" ");

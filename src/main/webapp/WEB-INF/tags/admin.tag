@@ -41,7 +41,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/spec_search">Расширенный поиск</a></li>
+                <%--<li><a href="/spec_search">Расширенный поиск</a></li>--%>
                 <li><a href="/office">Личный кабинет</a></li>
                 <li><a href="/logout">Выйти</a></li>
             </ul>

@@ -53,14 +53,14 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label text-primary required">Дата Рождения</label>
                     <input class="form-control input-md" type="text" name="dateOfBirth" value="${patient.dateOfBirth}"
-                           id="dateOfBirth" required="required">
+                           id="dateOfBirth" required="required" placeholder="ДД-ММ-ГГГГ">
                 </div>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <div class="form-group row">
                     <label class="col-2 col-form-label text-primary required">Дата первого визита</label>
                     <input class="form-control input-md" type="text" name="dateOfFirstVisit" value="${patient.dateOfFirstVisit}"
-                           id="dateOfFirstVisit" required="required">
+                           id="dateOfFirstVisit" required="required" placeholder="ДД-ММ-ГГГГ">
                 </div>
             </div>
         </div>

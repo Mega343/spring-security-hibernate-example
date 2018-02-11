@@ -40,8 +40,8 @@
             <div style="color: red">Неправильный логин или пароль.</div>
         </c:if>
     </form>
-    <form class="form-signin" action="add_user" method="get">
-        <button class="btn btn-lg btn-success btn-block" type="submit">Забыли пароль</button>
+    <form class="form-signin" action="/activate_user" method="get">
+        <button class="btn btn-lg btn-success btn-block" type="submit">Активировать пользователя</button>
     </form>
 </div>
 

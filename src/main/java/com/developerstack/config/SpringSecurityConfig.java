@@ -23,7 +23,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("**/login")).and().authorizeRequests()
-				.antMatchers("/dashboard").hasRole("USER").and().formLogin().defaultSuccessUrl("/dashboard")
+				.antMatchers("/dashboard").hasRole("Admin").and().formLogin().defaultSuccessUrl("/dashboard")
 				.loginPage("/login").and().logout().permitAll();
 	}
 

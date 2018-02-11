@@ -20,13 +20,13 @@ public class Employee implements Serializable {
     private String lastName;
     @Column(name = "patronymic")
     private String patronymic;
+    @Column(name = "date_of_birth")
+    private String dateOfBirth;
     @Column(name = "login", unique = true)
-    @NotNull
     private String login;
     @Column(name = "email", unique = true)
     private String email;
     @Column(name = "password")
-    @NotNull
     private String password;
     @Column(name = "phone_number", unique = true)
     @NotNull
@@ -34,6 +34,8 @@ public class Employee implements Serializable {
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private Role role;
+    @Column(name = "is_activated", columnDefinition = "boolean default false")
+    private boolean isActivated;
 
     public Employee() {
     }
@@ -108,5 +110,21 @@ public class Employee implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public boolean isActivated() {
+        return isActivated;
+    }
+
+    public void setActivated(boolean activated) {
+        isActivated = activated;
     }
 }

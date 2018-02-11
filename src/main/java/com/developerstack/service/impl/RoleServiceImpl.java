@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
-//@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {ObjectNotFoundException.class,
-//        ConstraintViolationException.class})
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
@@ -44,5 +44,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getRoleByName(String name) {
         return roleDao.getRoleByName(name);
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roleDao.getAllRoles();
     }
 }

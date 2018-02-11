@@ -2,6 +2,8 @@ package com.developerstack.dao;
 
 import com.developerstack.model.Role;
 
+import java.util.List;
+
 public interface RoleDao {
 
     boolean add(Role role);
@@ -14,4 +16,5 @@ public interface RoleDao {
 
     Role getRoleByName(String name);
 
+    List<Role> getAllRoles();
 }

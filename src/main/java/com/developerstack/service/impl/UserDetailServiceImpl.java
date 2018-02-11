@@ -12,8 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,8 +19,6 @@ import java.util.List;
 
 
 @Component(value = "userDetailService")
-//@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {ObjectNotFoundException.class,
-//		ConstraintViolationException.class})
 public class UserDetailServiceImpl implements UserDetailsService, EmployeeService {
 	
 	@Autowired
@@ -33,11 +29,11 @@ public class UserDetailServiceImpl implements UserDetailsService, EmployeeServic
 		if(employee == null){
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
-		return new org.springframework.security.core.userdetails.User(String.valueOf(employee.getEmployeeId()), employee.getPassword(), getAuthority());
+		return new org.springframework.security.core.userdetails.User(employee.getLogin(), employee.getPassword(), getAuthority(employee));
 	}
 
-	private List<SimpleGrantedAuthority> getAuthority() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+	private List<SimpleGrantedAuthority> getAuthority(Employee employee) {
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_" + employee.getRole().getUserRole()));
 	}
 
 	@Override
@@ -88,8 +84,12 @@ public class UserDetailServiceImpl implements UserDetailsService, EmployeeServic
 		return result;
 	}
 
-	public List<com.developerstack.model.Employee> getEmployees() {
+	public List<Employee> getEmployees() {
 		return employeeDao.getAllEmployees();
 	}
 
+	@Override
+	public Employee findEmployeeByLogin(String login) {
+		return employeeDao.findEmployeeByLogin(login);
+	}
 }

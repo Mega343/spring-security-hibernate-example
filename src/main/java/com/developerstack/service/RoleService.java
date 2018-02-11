@@ -2,6 +2,8 @@ package com.developerstack.service;
 
 import com.developerstack.model.Role;
 
+import java.util.List;
+
 public interface RoleService {
 
     boolean add(Role role);
@@ -13,4 +15,6 @@ public interface RoleService {
     Role getRole(Integer id);
 
     Role getRoleByName(String name);
+
+    List<Role> getAllRoles();
 }

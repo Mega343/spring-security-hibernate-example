@@ -1,9 +1,10 @@
-INSERT INTO role(user_role)VALUES ('User');
+INSERT INTO role(user_role)VALUES ('Doctor');
 INSERT INTO role(user_role)VALUES ('Admin');
+INSERT INTO role(user_role)VALUES ('Other');
 
 INSERT INTO employee(first_name,last_name,login,email,phone_number,role_id,password)VALUES('Елена', 'Лисовец','Elena','elana@mail.ru','+380509738744', 2, 'qwerty');
 INSERT INTO employee(first_name,last_name,login,email,phone_number,role_id,password)VALUES('Ира', 'Ира','Ira','iraa@mail.ru','+05097378744', 1, 'qwerty');
-INSERT INTO employee(first_name,last_name,login,email,phone_number,role_id,password)VALUES('Света', 'Света','Svra','irasa@mail.ru','+380999738744', 1, 'qwerty');
+INSERT INTO employee(first_name,last_name,login,email,phone_number,role_id,password)VALUES('Света', 'Света','Svra','irasa@mail.ru','+380999738744', 3, 'qwerty');
 
 INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Сидор','Сидоров','Сидорович','0661234567','01-01-1991','01-15-2018','Волчанка',1);
 INSERT INTO patient(first_name,last_name,PATRONYMIC,phone_number,date_of_birth,date_of_first_visit,diagnosis,employee_id)VALUES('Иван','Иванов','Иванович','0661334567','10-12-1880','01-15-2018','Гранулематоз Вегенера',2);
@@ -19,6 +20,6 @@ INSERT INTO analysis(ANALYSIS_DATE,ANALYSIS_NAME,PATIENT_ID,ANALYSIS_PICTURE)VAL
 INSERT INTO analysis(ANALYSIS_DATE,ANALYSIS_NAME,PATIENT_ID,ANALYSIS_PICTURE)VALUES('2017-08-25','Кариотипирование (кровь, синдромы Прадера-Вилли/Ангельмана, GTG- и FISH-методы)',3,null);
 INSERT INTO analysis(ANALYSIS_DATE,ANALYSIS_NAME,PATIENT_ID,ANALYSIS_PICTURE)VALUES('2017-08-25','Bordetella pertussis, антитела IgG (метод Вестернблот)',4,null);
 
-INSERT INTO appointments(APPOINTMENTS_DATE,APPOINTMENTS_PICTURE,PATIENT_ID)VALUES('2017-08-25',null,1);
-INSERT INTO appointments(APPOINTMENTS_DATE,APPOINTMENTS_PICTURE,PATIENT_ID)VALUES('2017-08-25',null,2);
-INSERT INTO appointments(APPOINTMENTS_DATE,APPOINTMENTS_PICTURE,PATIENT_ID)VALUES('2017-08-25',null,3);
+INSERT INTO appointments(APPOINTMENTS_DATE,APPOINTMENTS_PICTURE,PATIENT_ID,IMAGESCOUNT)VALUES('2017-08-25',null,1,1);
+INSERT INTO appointments(APPOINTMENTS_DATE,APPOINTMENTS_PICTURE,PATIENT_ID,IMAGESCOUNT)VALUES('2017-08-25',null,2,1);
+INSERT INTO appointments(APPOINTMENTS_DATE,APPOINTMENTS_PICTURE,PATIENT_ID,IMAGESCOUNT)VALUES('2017-08-25',null,3,1);
