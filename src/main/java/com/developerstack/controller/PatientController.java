@@ -31,6 +31,7 @@ import static com.developerstack.Constants.*;
 import static java.util.Objects.nonNull;
 
 @Controller
+@RequestMapping(value = "/patients")
 public class PatientController {
 
     @Autowired
@@ -212,6 +213,31 @@ public class PatientController {
             model.addObject(ERROR, "Не получилось обновить пациента. Что-то произошло не так.");
             model.setViewName(DASHBOARD);
         }
+        return model;
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ModelAndView search(@RequestParam("search") String search) {
+        ModelAndView model = new ModelAndView();
+        List<Patient> patients = patientService.searchPatient(search);
+        if (patients.isEmpty()) {
+            model.addObject(ERROR, "Не найдено ни одного пацента с такими данными: " + search + "\"." +
+                    " Попробуйте сократить параметры поиска или проверить все ли введено правильно.");
+            model.setViewName(DASHBOARD);
+        } else if (patients.size() == 1) {
+            Patient patient = patients.get(0);
+            List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
+            List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
+            model.addObject(PATIENT, patient);
+            model.addObject(EMPLOYEE, patient.getEmployee());
+            model.addObject(ANALYSIS, analysisList);
+            model.addObject(APPOINTMENTS, appointmentsList);
+            model.setViewName(VIEW_PATIENT);
+        } else {
+            model.addObject(PATIENTS, patients);
+            model.setViewName(PATIENTS);
+        }
+
         return model;
     }
 }

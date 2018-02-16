@@ -15,7 +15,7 @@
                 <h4 class="modal-title" style="color: #2b669a">Добавить назначение
                     для ${patient.lastName} ${patient.firstName}</h4>
             </div>
-            <form action="/new_appointments" method="post" enctype="multipart/form-data" id="add_appointments_form">
+            <form action="/patients/new_appointments" method="post" enctype="multipart/form-data" id="add_appointments_form">
                 <div class="modal-body col-xs-12 col-sm-12 col-md-12">
 
                     <input type="hidden" name="patientId" id="patientId" value="${patient.patientId}"/>

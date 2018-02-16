@@ -7,7 +7,7 @@
     <jsp:attribute name="tableName">Объявления</jsp:attribute>
     <jsp:attribute name="error">${error}</jsp:attribute>
     <jsp:attribute name="informationMessage">${informationMessage}</jsp:attribute>
-    <jsp:attribute name="action">/add_patient</jsp:attribute>
+    <jsp:attribute name="action">/patients/add_patient</jsp:attribute>
     <jsp:attribute name="actionDescription">Добавить пациента</jsp:attribute>
     <jsp:attribute name="helpimage">
 <style>

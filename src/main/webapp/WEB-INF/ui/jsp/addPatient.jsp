@@ -14,7 +14,7 @@
 <script type="text/javascript" src="/blockButton.js"></script>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
-    <form class="form-signin" action="/new_patient" method="post" id="add_patient_form">
+    <form class="form-signin" action="/patients/new_patient" method="post" id="add_patient_form">
         <p style="color: red">${error}</p>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">

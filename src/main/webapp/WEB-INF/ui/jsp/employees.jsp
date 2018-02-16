@@ -48,13 +48,13 @@
                  <p readonly="">${employee.role.userRole}</p>
              </td>
              <td class="col-xs-2 col-sm-2 col-md-2">
-                 <form action="/edit_employee" method="get">
+                 <form action="/staff/edit_employee" method="get">
                      <input type="hidden" name="employee_id" value="${employee.employeeId}"/>
                      <button type="submit" class="btn btn-xs btn-info">Редактировать</button>
                  </form>
              </td>
              <td class="col-xs-2 col-sm-2 col-md-2">
-                 <form action="/remove_employee" method="get">
+                 <form action="/staff/remove_employee" method="get">
                      <input type="hidden" name="employee_id" value="${employee.employeeId}"/>
                      <button type="submit" class="btn btn-xs btn-danger"
                             onclick="return confirm('Вы уверены, что хотите удалить ${employee.lastName} ${employee.firstName}?')">Удалить</button>
@@ -64,7 +64,7 @@
      </c:forEach>
      </tbody>
  </table>
-    <form class="form-signin" action="/add_employee" method="get">
+    <form class="form-signin" action="/staff/add_employee" method="get">
         <center>
         <button class="btn btn-lg btn-success btn-block left-button" type="submit" style="WIDTH: 235px; HEIGHT: 51px">
                 Добавить сотрудника

@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 import static com.developerstack.Constants.*;
 
 @Controller
+@RequestMapping(value = "/staff")
 public class EmployeeController {
 
     @Autowired
@@ -49,7 +50,7 @@ public class EmployeeController {
         } catch (Exception e) {
             model.addObject(ERROR, "Что-то сломалось. Попробуйте чуть позже");
         }
-        model.setViewName("redirect:" + "/employees");
+        model.setViewName("redirect:" + "/staff/employees");
         return model;
     }
 
@@ -81,7 +82,7 @@ public class EmployeeController {
         } catch (Exception e) {
             model.setViewName(DASHBOARD);
         }
-        model.setViewName("redirect:" + "/employees");
+        model.setViewName("redirect:" + "/staff/employees");
         return model;
     }
 
@@ -102,27 +103,8 @@ public class EmployeeController {
         } catch (Exception e) {
             model.setViewName(DASHBOARD);
         }
-        model.setViewName("redirect:" + "/employees");
+        model.setViewName("redirect:" + "/staff/employees");
         return model;
     }
 
-
-    @RequestMapping(value = "/office", method = RequestMethod.GET)
-    public ModelAndView officeView() {
-        ModelAndView model = new ModelAndView();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        Employee employee = employeeService.findEmployeeByLogin(username);
-        List<Role> roles = roleService.getAllRoles();
-        model.addObject(ROLES, roles);
-        model.addObject("selectedRoleId", employee.getRole().getRoleID());
-        model.addObject(EMPLOYEE, employee);
-        model.setViewName("office");
-        return model;
-    }
 }

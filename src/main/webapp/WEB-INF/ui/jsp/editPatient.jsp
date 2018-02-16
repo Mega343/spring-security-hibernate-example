@@ -16,7 +16,7 @@
 <c:set var="selectedEmployeeId" value="${selectedEmployeeId}"/>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
-    <form class="form-signin" action="/update_patient" method="post">
+    <form class="form-signin" action="/patients/update_patient" method="post">
         <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <div class="form-group row">

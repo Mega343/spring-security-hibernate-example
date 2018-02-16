@@ -45,7 +45,7 @@
                 <li><a href="/office">Личный кабинет</a></li>
                 <li><a href="/logout">Выйти</a></li>
             </ul>
-            <form class="navbar-form navbar-right" action="/search" method="post">
+            <form class="navbar-form navbar-right" action="/patients/search" method="post">
                 <input type="text" class="form-control" placeholder="Поиск..." name="search" id="search">
             </form>
         </div>
@@ -57,7 +57,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li class="active"><a href="/dashboard">Пациенты <span class="sr-only">(current)</span></a></li>
-                <li><a href="/employees">Сотрудники</a></li>
+                <li><a href="/staff/employees">Сотрудники</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

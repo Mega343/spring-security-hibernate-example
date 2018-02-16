@@ -169,7 +169,7 @@
 
     <div class="form-group row">
         <center>
-            <form action="/edit_patient" method="get">
+            <form action="/patients/edit_patient" method="get">
                 <input type="hidden" name="patientId" value="${patient.patientId}"/>
                 <button class="btn btn-lg btn-primary btn-block" type="submit" style="WIDTH: 235px; HEIGHT: 51px">
                     Редактировать пациента

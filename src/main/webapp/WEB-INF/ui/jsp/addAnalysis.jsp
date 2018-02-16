@@ -15,7 +15,7 @@
                 <h4 class="modal-title" style="color: #2b669a">Добавить анализ
                     для ${patient.lastName} ${patient.firstName}</h4>
             </div>
-            <form action="/new_analysis" method="post" enctype="multipart/form-data" id="add_analysis_form">
+            <form action="/patients/new_analysis" method="post" enctype="multipart/form-data" id="add_analysis_form">
                 <div class="modal-body col-xs-12 col-sm-12 col-md-12">
 
                     <input type="hidden" name="patientId" id="patientId" value="${patient.patientId}"/>

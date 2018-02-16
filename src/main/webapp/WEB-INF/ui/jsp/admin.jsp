@@ -6,7 +6,7 @@
 <t:admin title="Список сотрудников">
     <jsp:attribute name="tableName">Сотрудники</jsp:attribute>
     <jsp:attribute name="error">${error}</jsp:attribute>
-    <jsp:attribute name="action">/add_patient</jsp:attribute>
+    <jsp:attribute name="action">/patients/add_patient</jsp:attribute>
     <jsp:attribute name="actionDescription">Добавить пациента</jsp:attribute>
     <jsp:attribute name="table">
     <table class="table table-striped">

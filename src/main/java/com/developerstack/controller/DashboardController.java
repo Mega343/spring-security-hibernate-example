@@ -1,18 +1,17 @@
 package com.developerstack.controller;
 
-import com.developerstack.model.Analysis;
-import com.developerstack.model.Appointments;
-import com.developerstack.model.Patient;
-import com.developerstack.service.AnalysisService;
-import com.developerstack.service.AppointmentsService;
+import com.developerstack.model.Employee;
+import com.developerstack.model.Role;
 import com.developerstack.service.EmployeeService;
-import com.developerstack.service.PatientService;
+import com.developerstack.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.List;
 
@@ -22,47 +21,36 @@ import static com.developerstack.Constants.*;
 public class DashboardController {
 
 	@Autowired
-	private PatientService patientService;
+	private EmployeeService employeeService;
 	@Autowired
-	private EmployeeService userService;
-	@Autowired
-	private AppointmentsService appointmentsService;
-	@Autowired
-	private AnalysisService analysisService;
+	private RoleService roleService;
+
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public ModelAndView dashboard() throws Exception {
     	ModelAndView model = new ModelAndView();
-    	model.addObject(EMPLOYEES, userService.getEmployees());
+//    	model.addObject(EMPLOYEES, employeeService.getEmployees());
     	model.setViewName(DASHBOARD);
     	return model;
     }
 
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView search(@RequestParam("search") String search) {
+	@RequestMapping(value = "/office", method = RequestMethod.GET)
+	public ModelAndView officeView() {
 		ModelAndView model = new ModelAndView();
-		List<Patient> patients = patientService.searchPatient(search);
-		if (patients.isEmpty()) {
-			model.addObject(ERROR, "Не найдено ни одного пацента с такими данными: " + search + "\"." +
-					" Попробуйте сократить параметры поиска или проверить все ли введено правильно.");
-			model.setViewName(DASHBOARD);
-		} else if (patients.size() == 1) {
-			Patient patient = patients.get(0);
-			List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
-			List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
-			model.addObject(PATIENT, patient);
-			model.addObject(EMPLOYEE, patient.getEmployee());
-			model.addObject(ANALYSIS, analysisList);
-			model.addObject(APPOINTMENTS, appointmentsList);
-			model.setViewName(VIEW_PATIENT);
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails)principal).getUsername();
 		} else {
-			model.addObject(PATIENTS, patients);
-			model.setViewName(PATIENTS);
+			username = principal.toString();
 		}
-
-    	return model;
-    }
-
-
+		Employee employee = employeeService.findEmployeeByLogin(username);
+		List<Role> roles = roleService.getAllRoles();
+		model.addObject(ROLES, roles);
+		model.addObject("selectedRoleId", employee.getRole().getRoleID());
+		model.addObject(EMPLOYEE, employee);
+		model.setViewName("office");
+		return model;
+	}
 
 }

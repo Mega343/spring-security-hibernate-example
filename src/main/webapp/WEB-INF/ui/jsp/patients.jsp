@@ -47,7 +47,7 @@
                  <p readonly="">${patient.diagnosis} ${patient.diagnosis}</p>
              </td>
              <td class="col-xs-2 col-sm-2 col-md-2">
-                 <form action="/view_patient" method="get">
+                 <form action="/patients/view_patient" method="get">
                      <input type="hidden" name="patient_id" value="${patient.patientId}"/>
                      <button type="submit" class="btn btn-xs btn-info">Открыть пациента</button>
                  </form>
