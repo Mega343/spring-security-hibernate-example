@@ -140,7 +140,7 @@ public class PatientDaoImpl implements PatientDao {
         List<Patient> patients = new ArrayList<>();
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery("from Patient where lastName = :lastName and firstName =:firstName and patronymic =:patronymic");
+            Query query = session.createQuery("from Patient where lastName = :lastName and firstName = :firstName and patronymic = :patronymic");
             query.setParameter("lastName", lastName);
             query.setParameter("firstName", firstName);
             query.setParameter("patronymic", patronymic);
@@ -161,7 +161,7 @@ public class PatientDaoImpl implements PatientDao {
         List<Patient> patients = new ArrayList<>();
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery("from Patient where lastName = :lastName and firstName =:firstName");
+            Query query = session.createQuery("from Patient where lastName = :lastName and firstName = :firstName");
             query.setParameter("lastName", lastName);
             query.setParameter("firstName", firstName);
             patients = query.list();

@@ -144,11 +144,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <%--<div class="form-group row">--%>
-                        <%--<center>--%>
-                            <%--<button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#addAnalysis">Добавить анализ</button>--%>
-                        <%--</center>--%>
-                    <%--</div>--%>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -197,11 +192,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <%--<div class="form-group row">--%>
-                        <%--<center>--%>
-                            <%--<button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#addAppointments">Добавить назначение</button>--%>
-                        <%--</center>--%>
-                    <%--</div>--%>
                 </div>
             </div>
 

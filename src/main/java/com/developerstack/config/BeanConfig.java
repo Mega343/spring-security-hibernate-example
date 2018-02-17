@@ -1,9 +1,6 @@
 package com.developerstack.config;
 
 import com.developerstack.controller.AppErrorController;
-import com.developerstack.dao.*;
-import com.developerstack.dao.impl.*;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.context.annotation.Bean;

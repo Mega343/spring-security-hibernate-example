@@ -2,23 +2,18 @@ package com.developerstack.service.impl;
 
 import com.developerstack.dao.EmployeeDao;
 import com.developerstack.model.Employee;
-import com.developerstack.service.EmployeeService;
-import org.apache.commons.lang3.math.NumberUtils;
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-@Component(value = "userDetailService")
+@Service(value = "userDetailService")
 public class UserDetailServiceImpl implements UserDetailsService {
 	
 	@Autowired
@@ -29,7 +24,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		if(employee == null){
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
-		return new org.springframework.security.core.userdetails.User(employee.getLogin(), employee.getPassword(), getAuthority(employee));
+		return new org.springframework.security.core.userdetails.User(employee.getLogin(),  employee.getPassword(), getAuthority(employee));
 	}
 
 	private List<SimpleGrantedAuthority> getAuthority(Employee employee) {

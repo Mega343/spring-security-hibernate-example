@@ -20,5 +20,7 @@ public class Constants {
     public static final String ADMIN_ROLE = "Admin";
     public static final String DOCTOR_ROLE = "Doctor";
     public static final String ROLES = "roles";
+    public static final String OFFICE = "office";
+
 
 }

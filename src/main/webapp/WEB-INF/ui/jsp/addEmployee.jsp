@@ -15,7 +15,9 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12">
     <form class="form-signin" action="/staff/add_employee" method="post" id="add_employee_form">
-        <p style="color: red">${error}</p>
+        <c:if test="${not empty error}">
+			<div class="alert alert-danger">${error}</div>
+		</c:if>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group row">

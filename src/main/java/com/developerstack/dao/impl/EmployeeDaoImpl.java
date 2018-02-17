@@ -38,7 +38,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            employees = session.createCriteria(Employee.class).list();
+            Query query = session.createQuery("from Employee where login = :login");
+            query.setParameter("login", login);
+            employees = query.list();
             if (!employees.isEmpty()) {
                 employee = employees.get(0);
             }
@@ -83,8 +85,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
             session.merge(employee);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null)
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -158,7 +162,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery("from Employee where lastName = :lastName and firstName = :=firstName");
+            Query query = session.createQuery("from Employee where lastName = :lastName and firstName = :firstName");
             query.setParameter("lastName", lastName);
             query.setParameter("firstName", firstName);
             employees = query.list();
@@ -178,7 +182,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery("from Employee where lastName = :lastName and firstName = :=firstName and patronymic :=patronymic");
+            Query query = session.createQuery("from Employee where lastName = :lastName and firstName = :firstName and patronymic = :patronymic");
             query.setParameter("lastName", lastName);
             query.setParameter("firstName", firstName);
             query.setParameter("patronymic", patronymic);

@@ -14,6 +14,6 @@ public interface AnalysisDao {
 
     Analysis getAnalysis(int id);
 
-    List findAnalysisByPatientId(int id);
+    List<Analysis> findAnalysisByPatientId(int id);
 
 }

@@ -3,13 +3,8 @@ package com.developerstack.service.impl;
 import com.developerstack.dao.RoleDao;
 import com.developerstack.model.Role;
 import com.developerstack.service.RoleService;
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service

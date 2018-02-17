@@ -8,8 +8,6 @@ import com.developerstack.service.AnalysisService;
 import com.developerstack.service.AppointmentsService;
 import com.developerstack.service.EmployeeService;
 import com.developerstack.service.PatientService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,13 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.developerstack.Constants.*;
-import static java.util.Objects.nonNull;
 
 @Controller
 @RequestMapping(value = "/patients")
@@ -164,7 +159,7 @@ public class PatientController {
                 res.setContentType("image/jpg");
                 outputStream.write(appointments.getAppointmentsPicture());
                 outputStream.write(appointments.getAppointmentsPictureTwo());
-
+                outputStream.close();
 //                model.addObject(IMAGE_ONE, outputStream);
 //                Patient patient = patientService.getPatient(appointments.getPatientId());
 //                model.addObject(PATIENT, patient);

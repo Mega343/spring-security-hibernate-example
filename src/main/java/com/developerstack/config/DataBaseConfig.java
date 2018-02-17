@@ -1,20 +1,15 @@
 package com.developerstack.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-//@EnableTransactionManagement
 @ComponentScan(basePackages = "com.developerstack")
 public class DataBaseConfig {
 
@@ -28,15 +23,6 @@ public class DataBaseConfig {
         return sessionFactory;
     }
 
-//    @Bean
-//    @Autowired
-//    public HibernateTransactionManager transactionManager(
-//            SessionFactory sessionFactory) {
-//        HibernateTransactionManager transactionManager = new HibernateTransactionManager(
-//                sessionFactory);
-//
-//        return transactionManager;
-//    }
 
     @Bean
     public DataSource dataSource() {
@@ -51,7 +37,7 @@ public class DataBaseConfig {
     private Properties hibernateProperties() {
         return new Properties() {
             {
-                setProperty("hibernate.hbm2ddl.auto", "create");
+                setProperty("hibernate.hbm2ddl.auto", "validate");
                 setProperty("hibernate.show_sql", "true");
                 setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
                 setProperty("hibernate.connection.CharSet", "utf8");

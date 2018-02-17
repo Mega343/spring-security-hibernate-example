@@ -37,70 +37,54 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4">
+            <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group row">
                     <label class="col-2 col-form-label text-primary required">Телефон</label>
                     <input class="form-control input-md" type="text" name="phoneNumber" value="${employee.phoneNumber}"
                            id="phoneNumber" required="required">
                 </div>
             </div>
-            <div class="col-xs-4 col-sm-4 col-md-4">
+            <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group row">
                     <label class="col-2 col-form-label text-primary required">Дата Рождения</label>
                     <input class="form-control input-md" type="text" name="dateOfBirth" value="${employee.dateOfBirth}"
                            id="dateOfBirth" required placeholder="ДД-ММ-ГГГГ">
                 </div>
             </div>
-            <div class="col-xs-4 col-sm-4 col-md-4">
+            <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group row">
                     <label class="col-2 col-form-label text-primary required">Логин</label>
                     <input class="form-control input-md" type="text" name="login" value="${employee.login}"
                            id="login" required>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4">
-                <div class="form-group row">
-                    <fieldset class="form-group">
-                        <label class="col-2 col-form-label text-primary required">Роль</label>
-                        <select class="form-control" name="role.roleID" id="role.roleID" required="required">
-                            <c:forEach var="role" items="${roles}">
-                                <option value="${role.roleID}" ${(role.roleID == selectedRoleId)?"selected":""}>${role.userRole}</option>
-                            </c:forEach>
-                        </select>
-                    </fieldset>
-                </div>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-4">
+            <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group row">
                     <label class="col-2 col-form-label text-primary">E-mail</label>
                     <input class="form-control input-md" type="text" name="email" value="${employee.email}"
                            id="email">
                 </div>
             </div>
-            <div class="col-xs-4 col-sm-4 col-md-4">
-                <input class="form-control input-md" name="employeeId" value="${employee.employeeId}"
-                       id="employeeId" type="hidden">
-
+            <div class="col-xs-0 col-sm-0 col-md-0">
+                <input class="form-control input-md" name="employeeId" value="${employee.employeeId}" id="employeeId" type="hidden">
             </div>
         </div>
         <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <label class="col-2 col-form-label text-primary required">Старый Пароль</label>
-                <input class="form-control input-md" type="text" name="oldPassword"
+                <input class="form-control input-md" type="password" name="oldPassword"
                        id="oldPassword" required>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <div class="form-group row">
                     <label class="col-2 col-form-label text-primary required">Новый пароль</label>
-                    <input class="form-control input-md" type="text" name="newPassword"
+                    <input class="form-control input-md" type="password" name="newPassword"
                            id="newPassword" required>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <label class="col-2 col-form-label text-primary required">Подтвердите пароль</label>
-                <input class="form-control input-md" type="text" name="confirmPassword"
+                <input class="form-control input-md" type="password" name="confirmPassword"
                        id="confirmPassword" required>
             </div>
         </div>

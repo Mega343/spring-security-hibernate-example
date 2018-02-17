@@ -36,17 +36,15 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-
             <a class="navbar-brand" href="/dashboard">Медицинский центр</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <%--<li><a href="/spec_search">Расширенный поиск</a></li>--%>
                 <li><a href="/office">Личный кабинет</a></li>
                 <li><a href="/logout">Выйти</a></li>
             </ul>
             <form class="navbar-form navbar-right" action="/patients/search" method="post">
-                <input type="text" class="form-control" placeholder="Поиск..." name="search" id="search">
+                <input type="text" style="width: 300pt" class="form-control" placeholder="Поиск пациента..." name="search" id="search">
             </form>
         </div>
     </div>
@@ -57,7 +55,9 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li class="active"><a href="/dashboard">Пациенты <span class="sr-only">(current)</span></a></li>
+                <sec:authorize access="hasRole('Admin')">
                 <li><a href="/staff/employees">Сотрудники</a></li>
+                </sec:authorize>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -69,12 +69,12 @@
             </form>
             <div class="text-center">
                 <c:if test="${not empty informationMessage}">
-                    <div class="error" style="color: #008000">${informationMessage}</div>
+                    <div class="alert alert-info error" style="color: #008000">${informationMessage}</div>
                 </c:if>
             </div>
             <div class="text-center">
                 <c:if test="${not empty error}">
-                    <div class="error" style="color: red">${error}</div>
+                    <div class="alert alert-danger error" style="color: red">${error}</div>
                 </c:if>
             </div>
             <h1 class="page-header">${tableName}</h1>

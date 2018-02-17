@@ -115,7 +115,7 @@
                     </div>
                     <div class="form-group row">
                         <center>
-                            <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#addAnalysis">Добавить анализ</button>
+                            <button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#addAnalysis">Добавить анализ</button>
                         </center>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                     </div>
                     <div class="form-group row">
                         <center>
-                            <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#addAppointments">Добавить назначение</button>
+                            <button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#addAppointments">Добавить назначение</button>
                         </center>
                     </div>
                 </div>

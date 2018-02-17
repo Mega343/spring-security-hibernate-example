@@ -5,10 +5,6 @@ import com.developerstack.model.*;
 import com.developerstack.service.EmployeeService;
 import com.developerstack.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.developerstack.Constants.*;
 
@@ -72,7 +67,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/update_employee", method = RequestMethod.POST)
-    public ModelAndView updatePatient(@ModelAttribute(EMPLOYEE) Employee employee) {
+    public ModelAndView updateEmployee(@ModelAttribute(EMPLOYEE) Employee employee) {
         ModelAndView model = new ModelAndView();
         try {
             Employee oldEmployeeData = employeeService.getEmployee(employee.getEmployeeId());

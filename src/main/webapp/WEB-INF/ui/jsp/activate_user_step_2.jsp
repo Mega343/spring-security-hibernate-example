@@ -29,25 +29,19 @@
 
 <div class="container">
     <p><a href="/login"><img src="/icon.jpg" alt="Red Cross" class="center-block"></a></p>
-    <form class="form-signin" action="/activate" method="post">
-        <h3 class="form-signin-heading">Заполните форму для завершения активации</h3>
+    <form class="form-signin" action="/activate_user_full_data" method="post">
+        <h3 class="form-signin-heading">Введите свои данные для продолжения активации в системе</h3>
         <%--<label for="lastName" class="sr-only">Фамилия</label>--%>
         <label class="col-2 col-form-label">Фамилия</label>
-        <p class="form-control" readonly="">${employee.lastName}</p>
+        <p class="form-control" readonly="">${lastName}</p>
         <label class="col-2 col-form-label">Имя</label>
-        <p class="form-control" readonly="">${employee.firstName}</p>
+        <p class="form-control" readonly="">${firstName}</p>
         <label class="col-2 col-form-label">Дата рождения</label>
-        <p class="form-control" readonly="">${employee.dateOfBirth}</p>
+        <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" required="required" placeholder="ДД-ММ-ГГГГ">
         <label class="col-2 col-form-label">Телефон</label>
-        <p class="form-control" readonly="">${employee.phoneNumber}</p>
-        <label class="col-2 col-form-label">Логин</label>
-        <input type="text" class="form-control" name="login" id="login" placeholder="Логин" required="required">
-        <label class="col-2 col-form-label">Пароль</label>
-        <input type="password" class="form-control" name="password" id="password" placeholder="Пароль" required="required">
-        <label class="col-2 col-form-label">Повторите пароль</label>
-        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Пароль" required="required">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Активировать</button>
-        <input type="hidden" name="employeeId" value="${employee.employeeId}">
+        <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" required="required">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Далее</button>
+        <input type="hidden" name="employeeId" value="${employeeId}">
         <input type="hidden" name="${_csrf.parameterName}"
                value="${_csrf.token}" />
 

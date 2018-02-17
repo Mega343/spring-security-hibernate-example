@@ -4,12 +4,8 @@ import com.developerstack.dao.PatientDao;
 import com.developerstack.model.Patient;
 import com.developerstack.service.PatientService;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -25,9 +25,12 @@
 <body>
 
 <div class="container">
-    <img src="/icon.jpg" alt="Red Cross" class="center-block">
+    <p><a href="/login"><img src="/icon.jpg" alt="Red Cross" class="center-block"></a></p>
     <form class="form-signin" action="/login" method="post">
         <h2 class="form-signin-heading">Войдите в систему</h2>
+        <c:if test="${not empty informationMessage}">
+            <div class="alert alert-info">${informationMessage}</div>
+        </c:if>
         <label for="username" class="sr-only">Логин</label>
         <input type="text" id="username" name="username" class="form-control" placeholder="Логин" required
                autofocus>
@@ -37,7 +40,7 @@
         <input type="hidden" name="${_csrf.parameterName}"
                value="${_csrf.token}" />
         <c:if test="${param.error ne null}">
-            <div style="color: red">Неправильный логин или пароль.</div>
+            <div class="alert alert-danger" style="color: red">Неправильный логин или пароль.</div>
         </c:if>
     </form>
     <form class="form-signin" action="/activate_user" method="get">
