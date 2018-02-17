@@ -10,7 +10,7 @@ public interface AnalysisService {
 
     boolean add(Analysis analysis, MultipartFile analysisFile) throws IOException;
 
-    boolean edit(Analysis analysis);
+    boolean edit(Analysis analysis, MultipartFile file) throws IOException;
 
     boolean delete(int id);
 

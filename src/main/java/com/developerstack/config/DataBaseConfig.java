@@ -37,7 +37,7 @@ public class DataBaseConfig {
     private Properties hibernateProperties() {
         return new Properties() {
             {
-                setProperty("hibernate.hbm2ddl.auto", "validate");
+                setProperty("hibernate.hbm2ddl.auto", "create");
                 setProperty("hibernate.show_sql", "true");
                 setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
                 setProperty("hibernate.connection.CharSet", "utf8");

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AnalysisServiceImpl implements AnalysisService {
@@ -25,9 +26,40 @@ public class AnalysisServiceImpl implements AnalysisService {
     }
 
     @Override
-    public boolean edit(Analysis analysis) {
-        analysisDao.edit(analysis);
-        return true;
+    public boolean edit(Analysis analysis, MultipartFile analysisFile) throws IOException {
+        byte[] file = analysisFile.getBytes();
+
+        if (Objects.isNull(analysis.getAnalysisPicture())) {
+            analysis.setAnalysisPicture(file);
+            analysisDao.edit(analysis);
+            return true;
+        }
+        if (Objects.isNull(analysis.getAnalysisPictureTwo())) {
+            analysis.setAnalysisPictureTwo(file);
+            analysisDao.edit(analysis);
+            return true;
+        }
+        if (Objects.isNull(analysis.getAnalysisPictureThree())) {
+            analysis.setAnalysisPictureThree(file);
+            analysisDao.edit(analysis);
+            return true;
+        }
+        if (Objects.isNull(analysis.getAnalysisPictureFour())) {
+            analysis.setAnalysisPictureFour(file);
+            analysisDao.edit(analysis);
+            return true;
+        }
+        if (Objects.isNull(analysis.getAnalysisPictureFive())) {
+            analysis.setAnalysisPictureFive(file);
+            analysisDao.edit(analysis);
+            return true;
+        }
+        if (Objects.isNull(analysis.getAnalysisPictureSix())) {
+            analysis.setAnalysisPictureSix(file);
+            analysisDao.edit(analysis);
+            return true;
+        }
+        return false;
     }
 
     @Override

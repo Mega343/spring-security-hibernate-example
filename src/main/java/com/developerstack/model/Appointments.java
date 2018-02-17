@@ -35,9 +35,10 @@ public class Appointments implements Serializable {
     @Column(name = "appointments_picture_5")
     @Lob
     private byte[] appointmentsPictureFive;
-    @Column(name = "imagesCount")
-    @NotNull
-    private int imagesCount;
+    @Column(name = "appointments_picture_6")
+    @Lob
+    private byte[] appointmentsPictureSix;
+
 
     public Appointments() {
     }
@@ -114,11 +115,11 @@ public class Appointments implements Serializable {
         this.appointmentsPicture = appointmentsPicture;
     }
 
-    public int getImagesCount() {
-        return imagesCount;
+    public byte[] getAppointmentsPictureSix() {
+        return appointmentsPictureSix;
     }
 
-    public void setImagesCount(int imagesCount) {
-        this.imagesCount = imagesCount;
+    public void setAppointmentsPictureSix(byte[] appointmentsPictureSix) {
+        this.appointmentsPictureSix = appointmentsPictureSix;
     }
 }

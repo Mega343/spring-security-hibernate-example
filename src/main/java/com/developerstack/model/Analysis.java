@@ -36,6 +36,9 @@ public class Analysis implements Serializable {
     @Column(name = "analysis_picture_5")
     @Lob
     private byte[] analysisPictureFive;
+    @Column(name = "analysis_picture_6")
+    @Lob
+    private byte[] analysisPictureSix;
 
     public Analysis() {
     }
@@ -111,4 +114,13 @@ public class Analysis implements Serializable {
     public void setAnalysisPictureFour(byte[] analysisPictureFour) {
         this.analysisPictureFour = analysisPictureFour;
     }
+
+    public byte[] getAnalysisPictureSix() {
+        return analysisPictureSix;
+    }
+
+    public void setAnalysisPictureSix(byte[] analysisPictureSix) {
+        this.analysisPictureSix = analysisPictureSix;
+    }
 }
+

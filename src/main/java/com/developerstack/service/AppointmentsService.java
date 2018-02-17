@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface AppointmentsService {
 
-    boolean add(Appointments appointments, MultipartFile[] appointmentsFile) throws IOException;
+    boolean add(Appointments appointments, MultipartFile appointmentsFile) throws IOException;
 
-    boolean edit(Appointments appointments);
+    boolean edit(Appointments appointments, MultipartFile appointmentsFile) throws IOException;
 
     boolean delete(int id);
 

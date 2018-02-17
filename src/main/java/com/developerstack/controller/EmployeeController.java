@@ -26,7 +26,7 @@ public class EmployeeController {
     private RoleService roleService;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
-    public ModelAndView dashboard() throws Exception {
+    public ModelAndView employees() throws Exception {
         ModelAndView model = new ModelAndView();
         model.addObject(EMPLOYEES, employeeService.getEmployees());
         model.setViewName("employees");
@@ -96,7 +96,9 @@ public class EmployeeController {
         try {
             employeeService.add(employee);
         } catch (Exception e) {
+            model.addObject(ERROR, "Не удалось добавить пользовтеля. Пользователь с таким номером телефона уже есть в системе.");
             model.setViewName(DASHBOARD);
+            return model;
         }
         model.setViewName("redirect:" + "/staff/employees");
         return model;

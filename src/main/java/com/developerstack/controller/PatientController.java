@@ -20,10 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.developerstack.Constants.*;
+import static java.util.Objects.nonNull;
 
 @Controller
 @RequestMapping(value = "/patients")
@@ -71,7 +73,11 @@ public class PatientController {
     public ModelAndView addPatient(@RequestParam("patient_id") String patientId) {
         ModelAndView model = new ModelAndView();
         Patient patient = patientService.getPatient(Integer.parseInt(patientId));
+        List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
+        List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
         model.addObject(PATIENT, patient);
+        model.addObject(ANALYSIS, analysisList);
+        model.addObject(APPOINTMENTS, appointmentsList);
         model.addObject(EMPLOYEE, employeeService.getEmployee(patient.getEmployee().getEmployeeId()));
         model.setViewName(VIEW_PATIENT);
 
@@ -80,7 +86,7 @@ public class PatientController {
 
     @RequestMapping(value = "/new_analysis", method = RequestMethod.POST)
     public ModelAndView addAnalysis(@ModelAttribute(ANALYSIS) Analysis analysis,
-                                   @RequestParam("analysisFile") MultipartFile analysisFile) {
+                                    @RequestParam("analysisFile") MultipartFile analysisFile) {
         ModelAndView model = new ModelAndView();
         try {
             analysisService.add(analysis, analysisFile);
@@ -106,7 +112,7 @@ public class PatientController {
 
     @RequestMapping(value = "/new_appointments", method = RequestMethod.POST)
     public ModelAndView addAppointment(@ModelAttribute(APPOINTMENTS) Appointments appointments,
-                                   @RequestParam("appointments[]") MultipartFile[] appointmentsFile) {
+                                       @RequestParam("appointments") MultipartFile appointmentsFile) {
         ModelAndView model = new ModelAndView();
         try {
             appointmentsService.add(appointments, appointmentsFile);
@@ -132,17 +138,36 @@ public class PatientController {
 
     @RequestMapping(value = "/view_analysis", method = RequestMethod.GET)
     public ModelAndView viewAnalysis(@RequestParam("analysisId") String analysisId,
+                                     @RequestParam("picture") String pictureNumber,
                                      HttpServletRequest req, HttpServletResponse res) {
         ModelAndView model = new ModelAndView();
-        try(ServletOutputStream outputStream =  res.getOutputStream()) {
+        try (ServletOutputStream outputStream = res.getOutputStream()) {
             Analysis analysis = analysisService.getAnalysis(Integer.parseInt(analysisId));
             res.setContentType("image/jpg");
-            outputStream.write(analysis.getAnalysisPicture());
-            outputStream.close();
-            model.addObject(IMAGE_ONE, outputStream);
-            Patient patient = patientService.getPatient(analysis.getPatientId());
-            model.addObject(PATIENT, patient);
-            model.setViewName("viewAnalysis");
+            if (PIC_1.equals(pictureNumber)) {
+                outputStream.write(analysis.getAnalysisPicture());
+                outputStream.close();
+            }
+            if (PIC_2.equals(pictureNumber)) {
+                outputStream.write(analysis.getAnalysisPictureTwo());
+                outputStream.close();
+            }
+            if (PIC_3.equals(pictureNumber)) {
+                outputStream.write(analysis.getAnalysisPictureThree());
+                outputStream.close();
+            }
+            if (PIC_4.equals(pictureNumber)) {
+                outputStream.write(analysis.getAnalysisPictureFour());
+                outputStream.close();
+            }
+            if (PIC_5.equals(pictureNumber)) {
+                outputStream.write(analysis.getAnalysisPictureFive());
+                outputStream.close();
+            }
+            if (PIC_6.equals(pictureNumber)) {
+                outputStream.write(analysis.getAnalysisPictureSix());
+                outputStream.close();
+            }
         } catch (Exception e) {
             model.addObject(ERROR, e.getMessage());
             model.setViewName(DASHBOARD);
@@ -151,30 +176,49 @@ public class PatientController {
     }
 
     @RequestMapping(value = "/view_appointments", method = RequestMethod.GET)
-        public ModelAndView viewAppointments(@RequestParam("appointmentsId") String appointmentsId,
-                HttpServletRequest req, HttpServletResponse res) {
-            ModelAndView model = new ModelAndView();
-            try(ServletOutputStream outputStream =  res.getOutputStream()) {
-                Appointments appointments = appointmentsService.getAppointments(Integer.parseInt(appointmentsId));
-                res.setContentType("image/jpg");
+    public ModelAndView viewAppointments(@RequestParam("appointmentsId") String appointmentsId,
+                                         @RequestParam("picture") String pictureNumber,
+                                         HttpServletRequest req, HttpServletResponse res) {
+        ModelAndView model = new ModelAndView();
+        try (ServletOutputStream outputStream = res.getOutputStream()) {
+            Appointments appointments = appointmentsService.getAppointments(Integer.parseInt(appointmentsId));
+            res.setContentType("image/jpg");
+            if (PIC_1.equals(pictureNumber)) {
                 outputStream.write(appointments.getAppointmentsPicture());
+                outputStream.close();
+            }
+            if (PIC_2.equals(pictureNumber)) {
                 outputStream.write(appointments.getAppointmentsPictureTwo());
                 outputStream.close();
-//                model.addObject(IMAGE_ONE, outputStream);
-//                Patient patient = patientService.getPatient(appointments.getPatientId());
-//                model.addObject(PATIENT, patient);
-               // model.setViewName("viewAppointments");
-            } catch (Exception e) {
-                model.addObject(ERROR, e.getMessage());
-                model.setViewName(DASHBOARD);
             }
-            return model;
+            if (PIC_3.equals(pictureNumber)) {
+                outputStream.write(appointments.getAppointmentsPictureThree());
+                outputStream.close();
+            }
+            if (PIC_4.equals(pictureNumber)) {
+                outputStream.write(appointments.getAppointmentsPictureFour());
+                outputStream.close();
+            }
+            if (PIC_5.equals(pictureNumber)) {
+                outputStream.write(appointments.getAppointmentsPictureFive());
+                outputStream.close();
+            }
+            if (PIC_6.equals(pictureNumber)) {
+                outputStream.write(appointments.getAppointmentsPictureSix());
+                outputStream.close();
+            }
+            outputStream.close();
+        } catch (Exception e) {
+            model.addObject(ERROR, e.getMessage());
+            model.setViewName(DASHBOARD);
+        }
+        return model;
     }
 
 
     @RequestMapping(value = "/edit_patient", method = RequestMethod.GET)
-        public ModelAndView editPatient(@RequestParam("patientId") String patientId) {
-            ModelAndView model = new ModelAndView();
+    public ModelAndView editPatient(@RequestParam("patientId") String patientId) {
+        ModelAndView model = new ModelAndView();
         try {
             Patient patient = patientService.getPatient(Integer.parseInt(patientId));
             List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
@@ -233,6 +277,61 @@ public class PatientController {
             model.setViewName(PATIENTS);
         }
 
+        return model;
+    }
+
+
+    @RequestMapping(value = "/update_analysis", method = RequestMethod.POST)
+    public ModelAndView updateAnalysis(@RequestParam("analysisId") String analysisId,
+                                       @RequestParam("analysisFile") MultipartFile analysisFile) throws IOException {
+        ModelAndView model = new ModelAndView();
+        Analysis analysis = analysisService.getAnalysis(Integer.parseInt(analysisId));
+        try {
+            analysisService.edit(analysis, analysisFile);
+            Patient patient = patientService.getPatient(analysis.getPatientId());
+            model.addObject(INFORMATION_MESSAGE, "Анализ для " + patient.getLastName()
+                    + " " + patient.getFirstName() + " успешно добавлен.");
+            List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
+            List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
+            model.addObject(PATIENT, patient);
+            model.addObject(EMPLOYEE, patient.getEmployee());
+            model.addObject(ANALYSIS, analysisList);
+            model.addObject(APPOINTMENTS, appointmentsList);
+            model.setViewName(VIEW_PATIENT);
+        } catch (Exception e) {
+            model.addObject(ERROR, "Ошибка во время добавления анализа. Попробуйте, пожалуйста, еще раз." + e.getMessage());
+            Patient patient = patientService.getPatient(analysis.getPatientId());
+            model.addObject(PATIENT, patient);
+            model.addObject(EMPLOYEE, patient.getEmployee());
+            model.setViewName(VIEW_PATIENT);
+        }
+        return model;
+    }
+
+    @RequestMapping(value = "/update_appointments", method = RequestMethod.POST)
+    public ModelAndView updateAppointments(@RequestParam("appointmentsId") String appointmentsId,
+                                       @RequestParam("appointmentsFile") MultipartFile appointmentsFile) throws IOException {
+        ModelAndView model = new ModelAndView();
+        Appointments appointments = appointmentsService.getAppointments(Integer.parseInt(appointmentsId));
+        try {
+            appointmentsService.edit(appointments, appointmentsFile);
+            Patient patient = patientService.getPatient(appointments.getPatientId());
+            model.addObject(INFORMATION_MESSAGE, "Анализ для " + patient.getLastName()
+                    + " " + patient.getFirstName() + " успешно добавлен.");
+            List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
+            List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
+            model.addObject(PATIENT, patient);
+            model.addObject(EMPLOYEE, patient.getEmployee());
+            model.addObject(ANALYSIS, analysisList);
+            model.addObject(APPOINTMENTS, appointmentsList);
+            model.setViewName(VIEW_PATIENT);
+        } catch (Exception e) {
+            model.addObject(ERROR, "Ошибка во время добавления анализа. Попробуйте, пожалуйста, еще раз." + e.getMessage());
+            Patient patient = patientService.getPatient(appointments.getPatientId());
+            model.addObject(PATIENT, patient);
+            model.addObject(EMPLOYEE, patient.getEmployee());
+            model.setViewName(VIEW_PATIENT);
+        }
         return model;
     }
 }
