@@ -316,7 +316,7 @@ public class PatientController {
         try {
             appointmentsService.edit(appointments, appointmentsFile);
             Patient patient = patientService.getPatient(appointments.getPatientId());
-            model.addObject(INFORMATION_MESSAGE, "Анализ для " + patient.getLastName()
+            model.addObject(INFORMATION_MESSAGE, "Назначение для " + patient.getLastName()
                     + " " + patient.getFirstName() + " успешно добавлен.");
             List<Appointments> appointmentsList = appointmentsService.findAppointmentsByPatientId(patient.getPatientId());
             List<Analysis> analysisList = analysisService.findAnalysisByPatientId(patient.getPatientId());
@@ -326,7 +326,7 @@ public class PatientController {
             model.addObject(APPOINTMENTS, appointmentsList);
             model.setViewName(VIEW_PATIENT);
         } catch (Exception e) {
-            model.addObject(ERROR, "Ошибка во время добавления анализа. Попробуйте, пожалуйста, еще раз." + e.getMessage());
+            model.addObject(ERROR, "Ошибка во время добавления назначения. Попробуйте, пожалуйста, еще раз." + e.getMessage());
             Patient patient = patientService.getPatient(appointments.getPatientId());
             model.addObject(PATIENT, patient);
             model.addObject(EMPLOYEE, patient.getEmployee());
