@@ -111,8 +111,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
             query.executeUpdate();
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null)
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

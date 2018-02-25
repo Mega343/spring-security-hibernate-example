@@ -21,11 +21,12 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.developerstack.Constants.*;
-import static java.util.Objects.nonNull;
 
 @Controller
 @RequestMapping(value = "/patients")
@@ -47,7 +48,7 @@ public class PatientController {
                 .filter(employee -> ADMIN_ROLE.equals(employee.getRole().getUserRole()) || DOCTOR_ROLE.equals(employee.getRole().getUserRole()))
                 .collect(Collectors.toList());
         model.addObject(EMPLOYEES, employees);
-        model.setViewName("addPatient");
+        model.setViewName(ADD_PATIENT);
         return model;
     }
 
@@ -64,7 +65,7 @@ public class PatientController {
         } catch (Exception e) {
             model.addObject(ERROR, "Во время добавления пациента " + patient.getLastName()
                     + " " + patient.getFirstName() + " что-то пошло не так. Пожалуйста, попробуйте еще раз.");
-            model.setViewName("addPatient");
+            model.setViewName(ADD_PATIENT);
         }
         return model;
     }
@@ -228,7 +229,7 @@ public class PatientController {
             model.addObject(ANALYSIS, analysisList);
             model.addObject(APPOINTMENTS, appointmentsList);
             model.addObject("selectedEmployeeId", patient.getEmployee().getEmployeeId());
-            model.setViewName("editPatient");
+            model.setViewName(EDIT_PATIENT);
         } catch (Exception e) {
             model.addObject(ERROR, e.getMessage());
             model.setViewName(DASHBOARD);
@@ -247,7 +248,7 @@ public class PatientController {
             model.addObject(PATIENT, patient);
             model.addObject(ANALYSIS, analysisList);
             model.addObject(APPOINTMENTS, appointmentsList);
-            model.setViewName("viewPatient");
+            model.setViewName(VIEW_PATIENT);
         } catch (Exception e) {
             model.addObject(ERROR, "Не получилось обновить пациента. Что-то произошло не так.");
             model.setViewName(DASHBOARD);
@@ -277,6 +278,31 @@ public class PatientController {
             model.setViewName(PATIENTS);
         }
 
+        return model;
+    }
+
+    @RequestMapping(value = "/allPatients", method = RequestMethod.GET)
+    public ModelAndView viewAllPatients() {
+        ModelAndView model = new ModelAndView();
+        List<Patient> patients = patientService.getAllPatients();
+        Collections.sort(patients, (p1, p2) -> {
+            if (p1.getLastName().charAt(0) > p2.getLastName().charAt(0))
+            {
+                return 1;
+            } else if(p1.getLastName().charAt(0) < p2.getLastName().charAt(0)) {
+                return -1;
+            } else {
+                return 0;
+            }
+
+        });
+        if (patients.isEmpty()) {
+            model.addObject(ERROR, "Не найдено ни одного пацента!");
+            model.setViewName(DASHBOARD);
+        } else {
+            model.addObject(PATIENTS, patients);
+            model.setViewName(PATIENTS);
+        }
         return model;
     }
 

@@ -19,8 +19,10 @@ public class AppointmentsServiceImpl implements AppointmentsService {
 
     @Override
     public boolean add(Appointments appointments, MultipartFile appointmentsFile) throws IOException {
-        byte[] file = appointmentsFile.getBytes();
-        appointments.setAppointmentsPicture(file);
+        if (!appointmentsFile.isEmpty()) {
+            byte[] file = appointmentsFile.getBytes();
+            appointments.setAppointmentsPicture(file);
+        }
         appointmentsDao.add(appointments);
         return true;
     }

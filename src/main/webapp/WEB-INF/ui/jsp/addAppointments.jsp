@@ -40,10 +40,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xs-11 col-sm-11 col-md-11 pop-up-input">
+                        <div class="form-group row">
+                            <label class="col-10 col-form-label">Текст назначения</label>
+                            <textarea class="form-control input-md" name="appointmentsText"
+                                      id="appointmentsText"></textarea>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <div class="input-group image-preview">
-                        <input type="text" class="form-control image-preview-filename" disabled="disabled" required="required">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
                           <span class="input-group-btn">
                           <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
                               <span class="glyphicon glyphicon-remove"></span> Очистить
@@ -51,7 +58,7 @@
                           <div class="btn btn-default image-preview-input">
                               <span class="glyphicon glyphicon-folder-open"></span>
                               <span class="image-preview-input-title">Выбрать</span>
-                              <input type="file" accept="image/png, image/jpeg, image/gif" name="appointments" required="required"/>
+                              <input type="file" accept="image/png, image/jpeg, image/gif" name="appointments"/>
                           </div>
                           </span>
                     </div>

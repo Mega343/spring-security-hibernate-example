@@ -20,6 +20,8 @@ public class Appointments implements Serializable {
     @Column(name = "appointments_date")
     @NotNull
     private String appointmentsDate;
+    @Column(name = "ads", length = Integer.MAX_VALUE)
+    private String appointmentsText;
     @Column(name = "appointments_picture")
     @Lob
     private byte[] appointmentsPicture;
@@ -121,5 +123,13 @@ public class Appointments implements Serializable {
 
     public void setAppointmentsPictureSix(byte[] appointmentsPictureSix) {
         this.appointmentsPictureSix = appointmentsPictureSix;
+    }
+
+    public String getAppointmentsText() {
+        return appointmentsText;
+    }
+
+    public void setAppointmentsText(String appointmentsText) {
+        this.appointmentsText = appointmentsText;
     }
 }

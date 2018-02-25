@@ -110,19 +110,15 @@
                                 <td class="col-xs-2 col-sm-2 col-md-2">
                                     <input type="button" class="btn btn-xs btn-warning" value="Открыть анализ"
                                            onclick="openAnalysis(${analysis.analysisId}, 'pic_1')"/>
+                                     <c:if test="${empty analysis.analysisPictureTwo}">
+                                         <tr><td></td></tr>
+                                     </c:if>
                                     <c:if test="${not empty analysis.analysisPictureFour}">
                                         <td class="col-xs-2 col-sm-2 col-md-2">
                                             <input type="button" class="btn btn-xs btn-warning" value="Открыть анализ"
                                                    onclick="openAnalysis(${analysis.analysisId}, 'pic_4')"/>
                                         </td>
                                     </c:if>
-                                     <c:if test="${empty analysis.analysisPictureThree}">
-                                            <td class="col-xs-2 col-sm-2 col-md-2">
-                                                <button type="button" class="btn btn-xs btn-info" data-toggle="modal" id="add_analysis_image"
-                                                        data-analysisId="${analysis.analysisId}" data-target="#addAnalysisImage">Добавить фото
-                                                </button>
-                                            </td>
-                                        </c:if>
                                 </td>
                                 </c:if>
                                 <c:if test="${not empty analysis.analysisPictureTwo}">
@@ -140,6 +136,15 @@
                                     </c:if>
                                 </tr>
                                 </c:if>
+                                <c:if test="${empty analysis.analysisPictureThree}">
+                                         <tr>
+                                             <td class="col-xs-2 col-sm-2 col-md-2">
+                                                 <button type="button" class="btn btn-xs btn-info" data-toggle="modal" id="add_analysis_image"
+                                                         data-analysisId="${analysis.analysisId}" data-target="#addAnalysisImage">Добавить фото
+                                                 </button>
+                                             </td>
+                                         </tr>
+                                        </c:if>
                                 <c:if test="${not empty analysis.analysisPictureThree}">
                                     <tr>
                                         <td class="col-xs-2 col-sm-2 col-md-2">
@@ -192,35 +197,36 @@
                             <tr>
                                 <th>Название назначения</th>
                                 <th>Дата</th>
+                                <th>Описание назначения</th>
                                 <th>Назначение</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="appointment" items="${appointments}">
                                 <tr>
-                                    <td rowspan="3" class="col-xs-5 col-sm-5 col-md-5">
+                                    <td rowspan="3" class="col-xs-4 col-sm-4 col-md-4">
                                         <p readonly="">${appointment.appointmentsName}</p>
                                     </td>
                                     <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2">
                                         <p readonly="">${appointment.appointmentsDate}</p>
                                     </td>
-                                    <c:if test="${not empty appointment.appointmentsPicture}">
+                                    <td rowspan="3" class="col-xs-4 col-sm-4 col-md-4">
+                                        <p readonly="">${appointment.appointmentsText}</p>
+                                    </td>
+
+                                <c:if test="${not empty appointment.appointmentsPicture}">
                                 <td class="col-xs-2 col-sm-2 col-md-2">
                                     <input type="button" class="btn btn-xs btn-warning" value="Открыть назначение"
                                            onclick="openAppointments(${appointment.appointmentsId}, 'pic_1')"/>
+                                     <c:if test="${empty appointment.appointmentsPictureTwo}">
+                                         <tr><td></td></tr>
+                                     </c:if>
                                     <c:if test="${not empty appointment.appointmentsPictureFour}">
                                         <td class="col-xs-2 col-sm-2 col-md-2">
                                             <input type="button" class="btn btn-xs btn-warning" value="Открыть назначение"
                                                    onclick="openAppointments(${appointment.appointmentsId}, 'pic_4')"/>
                                         </td>
                                     </c:if>
-                                     <c:if test="${empty appointment.appointmentsPictureThree}">
-                                            <td class="col-xs-2 col-sm-2 col-md-2">
-                                                <button type="button" class="btn btn-xs btn-info" data-toggle="modal" id="add_appointments_image"
-                                                        data-appointmentsId="${appointment.appointmentsId}" data-target="#addAppointmentsImage">Добавить фото
-                                                </button>
-                                            </td>
-                                        </c:if>
                                 </td>
                                 </c:if>
                                 <c:if test="${not empty appointment.appointmentsPictureTwo}">
@@ -237,6 +243,18 @@
                                         </td>
                                     </c:if>
                                 </tr>
+                                </c:if>
+                                <c:if test="${empty appointment.appointmentsPictureThree}">
+                                         <tr>
+                                             <td class="col-xs-2 col-sm-2 col-md-2">
+                                                 <button type="button" class="btn btn-xs btn-info" data-toggle="modal" id="add_appointments_image"
+                                                         data-appointmentsId="${appointment.appointmentsId}" data-target="#addAppointmentsImage">Добавить фото
+                                                 </button>
+                                             </td>
+                                         </tr>
+                                        <c:if test="${empty appointment.appointmentsPicture}">
+                                            <tr><td></td></tr>
+                                        </c:if>
                                 </c:if>
                                 <c:if test="${not empty appointment.appointmentsPictureThree}">
                                     <tr>

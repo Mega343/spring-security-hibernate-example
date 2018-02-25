@@ -55,6 +55,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li class="active"><a href="/dashboard">Пациенты <span class="sr-only">(current)</span></a></li>
+                <li><a href="/patients/allPatients">Все Пациенты</a></li>
                 <sec:authorize access="hasRole('Admin')">
                 <li><a href="/staff/employees">Сотрудники</a></li>
                 </sec:authorize>

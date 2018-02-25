@@ -29,7 +29,7 @@ public class EmployeeController {
     public ModelAndView employees() throws Exception {
         ModelAndView model = new ModelAndView();
         model.addObject(EMPLOYEES, employeeService.getEmployees());
-        model.setViewName("employees");
+        model.setViewName(EMPLOYEES);
         return model;
     }
 
@@ -43,7 +43,10 @@ public class EmployeeController {
                 employeeService.delete(employeeID);
             }
         } catch (Exception e) {
-            model.addObject(ERROR, "Что-то сломалось. Попробуйте чуть позже");
+            model.addObject(ERROR, "Нельзя удалить врача у которого есть пациенты.");
+            model.addObject(EMPLOYEES, employeeService.getEmployees());
+            model.setViewName(EMPLOYEES);
+            return model;
         }
         model.setViewName("redirect:" + "/staff/employees");
         return model;

@@ -86,7 +86,7 @@ public class DashboardController {
 		Employee employee = employeeService.getEmployee(Integer.parseInt(employeeId));
 		if (employee.getPhoneNumber().equals(phoneNumber) && employee.getDateOfBirth().equals(dateOfBirth) ) {
 			model.addObject(EMPLOYEE, employee);
-			model.setViewName("registration");
+			model.setViewName(REGISTRATION);
 			return model;
 		} else {
 			model.addObject("firstName", employee.getFirstName());
@@ -110,14 +110,14 @@ public class DashboardController {
 		if (!password.equals(confirmPassword)) {
 			model.addObject(ERROR, "Пароли не совпадают!");
 			model.addObject(EMPLOYEE, employee);
-			model.setViewName("registration");
+			model.setViewName(REGISTRATION);
 			return model;
 		}
 
 		if (password.length() < 5) {
 			model.addObject(ERROR, "Пароль доджен содержать минимум 5 символов!");
 			model.addObject(EMPLOYEE, employee);
-			model.setViewName("registration");
+			model.setViewName(REGISTRATION);
 			return model;
 		}
 
@@ -133,7 +133,7 @@ public class DashboardController {
 		} catch (Exception e) {
 			model.addObject(ERROR, "Логин уже занят, попробуйте другой!");
 			model.addObject(EMPLOYEE, employee);
-			model.setViewName("registration");
+			model.setViewName(REGISTRATION);
 			return model;
 		}
 

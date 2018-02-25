@@ -21,7 +21,7 @@
      </thead>
      <tbody>
      <c:forEach var="patient" items="${patients}">
-         <tr>
+         <tr class="col-xs-20 col-sm-20 col-md-20">
              <td class="col-xs-2 col-sm-2 col-md-2">
                  <p readonly="">${patient.lastName}</p>
              </td>
@@ -43,13 +43,13 @@
              <td class="col-xs-2 col-sm-2 col-md-2">
                  <p readonly="">${patient.employee.lastName} ${patient.employee.firstName}</p>
              </td>
-             <td class="col-xs-2 col-sm-2 col-md-2">
-                 <p readonly="">${patient.diagnosis} ${patient.diagnosis}</p>
-             </td>
+             <%--<td class="col-xs-4 col-sm-4 col-md-4" style="word-break: break-all">--%>
+                 <%--<p readonly="">${patient.diagnosis}</p>--%>
+             <%--</td>--%>
              <td class="col-xs-2 col-sm-2 col-md-2">
                  <form action="/patients/view_patient" method="get">
                      <input type="hidden" name="patient_id" value="${patient.patientId}"/>
-                     <button type="submit" class="btn btn-xs btn-info">Открыть пациента</button>
+                     <button type="submit" class="btn btn-xs btn-info">Открыть</button>
                  </form>
              </td>
          </tr>
