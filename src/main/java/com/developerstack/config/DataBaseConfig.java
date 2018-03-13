@@ -28,7 +28,7 @@ public class DataBaseConfig {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:tcp://localhost/~/medrec");
+        dataSource.setUrl("jdbc:h2:file:D:/database/medrec");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         return dataSource;
@@ -37,7 +37,7 @@ public class DataBaseConfig {
     private Properties hibernateProperties() {
         return new Properties() {
             {
-                setProperty("hibernate.hbm2ddl.auto", "create");
+                setProperty("hibernate.hbm2ddl.auto", "validate");
                 setProperty("hibernate.show_sql", "true");
                 setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
                 setProperty("hibernate.connection.CharSet", "utf8");

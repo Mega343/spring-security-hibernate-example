@@ -29,6 +29,7 @@
     <script type="text/javascript" src="/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/jquery.mask.min.js"></script>
     <script type="text/javascript" src="/jquery-ui.js"></script>
+    <script type="text/javascript" src="/avoidBackButton.js"></script>
 </head>
 
 <body>

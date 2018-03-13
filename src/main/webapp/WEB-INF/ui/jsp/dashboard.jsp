@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <%@ page contentType="text/html;charset=utf-8" %>
-<t:admin title="Список сотрудников">
+<t:admin title="Медицинский центр">
     <jsp:attribute name="tableName">Объявления</jsp:attribute>
     <jsp:attribute name="error">${error}</jsp:attribute>
     <jsp:attribute name="informationMessage">${informationMessage}</jsp:attribute>
